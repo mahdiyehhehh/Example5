@@ -18,14 +18,13 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #C5DDE0; /* 10% darker than #D7EDEF */
-            color: #1e2e2f;
+            background: #C5DDE0;
+            color: #1a2222;
             padding: 1.5rem;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             overflow-x: hidden;
         }
 
@@ -43,37 +42,6 @@
             z-index: 10;
         }
 
-        /* ─────────── FALLING COFFEE CUPS ─────────── */
-        .falling-cups {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .coffee-cup {
-            position: absolute;
-            font-size: 2.5rem;
-            animation: fall linear infinite;
-            opacity: 0.7;
-            user-select: none;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateY(110vh) rotate(720deg);
-                opacity: 0.1;
-            }
-        }
-
         /* ─────────── NAVIGATION ─────────── */
         nav {
             display: flex;
@@ -82,7 +50,7 @@
             flex-wrap: wrap;
             gap: 1rem;
             padding-bottom: 1.8rem;
-            border-bottom: 2px solid #B0CDD0; /* 10% darker than #BFDFE2 */
+            border-bottom: 2px solid #B0CDD0;
         }
 
         .logo {
@@ -91,7 +59,7 @@
             letter-spacing: -0.5px;
         }
         .logo .highlight {
-            color: #FFD87B;
+            color: #E6B84C;
         }
         .logo .muted {
             color: #B0CDD0;
@@ -107,14 +75,14 @@
         }
         .nav-links a {
             text-decoration: none;
-            color: #1e2e2f;
+            color: #1a2222;
             transition: color 0.2s;
             padding-bottom: 4px;
             border-bottom: 2px solid transparent;
         }
         .nav-links a:hover {
-            color: #FFD87B;
-            border-bottom-color: #FFD87B;
+            color: #E6B84C;
+            border-bottom-color: #E6B84C;
         }
 
         /* ─────────── HERO ─────────── */
@@ -125,7 +93,7 @@
         .hero h1 {
             font-size: 4rem;
             font-weight: 900;
-            color: #FFD87B;
+            color: #E6B84C;
             letter-spacing: -1.5px;
             line-height: 1.1;
         }
@@ -156,23 +124,56 @@
             text-decoration: none;
             display: inline-block;
             transition: all 0.2s ease;
+            position: relative;
+            overflow: visible;
         }
         .btn-primary {
-            background: #FFD87B;
-            color: #1a2728;
-            box-shadow: 0 10px 28px rgba(255, 216, 123, 0.4);
+            background: #E6B84C;
+            color: #1a2222;
+            box-shadow: 0 10px 28px rgba(230, 184, 76, 0.4);
         }
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 16px 40px rgba(255, 216, 123, 0.55);
+            box-shadow: 0 16px 40px rgba(230, 184, 76, 0.55);
         }
         .btn-secondary {
             background: #B0CDD0;
-            color: #1a2728;
+            color: #1a2222;
         }
         .btn-secondary:hover {
             transform: translateY(-3px) scale(1.02);
             background: #9dbec2;
+        }
+
+        /* ─────────── BURST STICKERS ─────────── */
+        .burst-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .burst-sticker {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: burstOut 1.2s ease-out forwards;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes burstOut {
+            0% {
+                transform: translate(0, 0) scale(0.5) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0) rotate(720deg);
+                opacity: 0;
+            }
         }
 
         /* ─────────── 3 SMALL PLACEHOLDERS UNDER HERO ─────────── */
@@ -190,7 +191,7 @@
             padding: 1rem;
             text-align: center;
             transition: transform 0.2s;
-            border: 1px solid rgba(255, 216, 123, 0.2);
+            border: 1px solid rgba(230, 184, 76, 0.2);
         }
         .mini-item:hover {
             transform: translateY(-4px);
@@ -212,7 +213,7 @@
         .mini-item h4 {
             font-size: 1rem;
             margin: 0.5rem 0 0.1rem;
-            color: #1e2e2f;
+            color: #1a2222;
         }
         .mini-item p {
             font-size: 0.8rem;
@@ -239,7 +240,7 @@
         }
 
         .info-card h3 {
-            color: #FFD87B;
+            color: #E6B84C;
             font-size: 1.6rem;
             margin-bottom: 1rem;
         }
@@ -251,7 +252,7 @@
         .info-card ul li {
             padding: 0.5rem 0;
             border-bottom: 1px solid rgba(172, 205, 208, 0.3);
-            color: #1e2e2f;
+            color: #1a2222;
             font-weight: 500;
             display: flex;
             justify-content: space-between;
@@ -265,7 +266,7 @@
         }
 
         .info-card p {
-            color: #1e2e2f;
+            color: #1a2222;
             line-height: 1.8;
             margin-bottom: 0.5rem;
         }
@@ -281,17 +282,17 @@
             border-bottom: none;
         }
         .contact-detail strong {
-            color: #FFD87B;
+            color: #E6B84C;
             min-width: 70px;
         }
         .contact-detail span {
-            color: #1e2e2f;
+            color: #1a2222;
         }
 
         /* ─────────── BANNER PLACEHOLDER ─────────── */
         .banner-placeholder {
             background: #FEFAC2;
-            border: 3px dashed #FFD87B;
+            border: 3px dashed #E6B84C;
             border-radius: 2.5rem;
             padding: 3.5rem 2rem;
             text-align: center;
@@ -329,14 +330,14 @@
         }
         .socials a {
             text-decoration: none;
-            color: #1e2e2f;
+            color: #1a2222;
             margin-left: 1.5rem;
             font-weight: 600;
             transition: color 0.2s;
             font-size: 0.95rem;
         }
         .socials a:hover {
-            color: #FFD87B;
+            color: #E6B84C;
         }
 
         /* ─────────── RESPONSIVE ─────────── */
@@ -371,9 +372,6 @@
             .banner-placeholder p {
                 font-size: 1.1rem;
             }
-            .coffee-cup {
-                font-size: 1.8rem !important;
-            }
         }
 
         @media (max-width: 450px) {
@@ -388,16 +386,13 @@
                 padding: 0.7rem 2rem;
                 font-size: 0.9rem;
             }
-            .coffee-cup {
-                font-size: 1.4rem !important;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ═══ FALLING COFFEE CUPS ═══ -->
-    <div class="falling-cups" id="fallingCups"></div>
+    <!-- ═══ BURST CONTAINER ═══ -->
+    <div class="burst-container" id="burstContainer"></div>
 
     <div class="container">
 
@@ -421,7 +416,7 @@
             </h1>
             <p>Fresh bread · slow coffee · winter comfort</p>
             <div class="btn-group">
-                <a href="#menu" class="btn btn-primary">Order Now</a>
+                <button class="btn btn-primary" id="orderBtn">Order Now</button>
                 <a href="#about" class="btn btn-secondary">Our Story</a>
             </div>
 
@@ -518,34 +513,41 @@
     </div>
 
     <script>
-        // ─── CREATE FALLING COFFEE CUPS ───
-        function createFallingCups() {
-            const container = document.getElementById('fallingCups');
-            const cupCount = 25;
+        // ─── BURST STICKERS ON CLICK ───
+        document.getElementById('orderBtn').addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const container = document.getElementById('burstContainer');
+            const count = 28;
 
-            for (let i = 0; i < cupCount; i++) {
-                const cup = document.createElement('div');
-                cup.className = 'coffee-cup';
-                cup.textContent = '☕';
+            for (let i = 0; i < count; i++) {
+                const sticker = document.createElement('div');
+                sticker.className = 'burst-sticker';
+                sticker.textContent = '☕';
 
-                // Random position, size, speed, delay
-                const size = 1.5 + Math.random() * 2;
-                const left = Math.random() * 100;
-                const duration = 8 + Math.random() * 12;
-                const delay = Math.random() * 15;
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = 150 + Math.random() * 350;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance - 100;
 
-                cup.style.left = left + '%';
-                cup.style.fontSize = size + 'rem';
-                cup.style.animationDuration = duration + 's';
-                cup.style.animationDelay = delay + 's';
-                cup.style.opacity = 0.3 + Math.random() * 0.5;
+                const size = 1.2 + Math.random() * 2.2;
 
-                container.appendChild(cup);
+                sticker.style.left = cx + 'px';
+                sticker.style.top = cy + 'px';
+                sticker.style.fontSize = size + 'rem';
+                sticker.style.setProperty('--tx', tx + 'px');
+                sticker.style.setProperty('--ty', ty + 'px');
+                sticker.style.animationDuration = (0.8 + Math.random() * 0.8) + 's';
+
+                container.appendChild(sticker);
+
+                // Remove after animation
+                setTimeout(() => {
+                    sticker.remove();
+                }, 1800);
             }
-        }
-
-        // ─── RUN ───
-        createFallingCups();
+        });
     </script>
 
 </body>
