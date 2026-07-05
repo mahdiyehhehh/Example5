@@ -160,7 +160,7 @@
         .burst-sticker {
             position: absolute;
             font-size: 2.5rem;
-            animation: burstOut 1.2s ease-out forwards;
+            animation: burstOut 2.5s ease-out forwards;
             user-select: none;
             pointer-events: none;
         }
@@ -176,48 +176,136 @@
             }
         }
 
-        /* ─────────── 3 SMALL PLACEHOLDERS UNDER HERO ─────────── */
-        .mini-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin: 2.5rem auto 0;
-            max-width: 800px;
+        /* ─────────── SLIDING GALLERY (Instagram/TikTok style) ─────────── */
+        .gallery-section {
+            margin: 2.5rem 0 1.5rem;
         }
 
-        .mini-item {
-            background: #FEFAC2;
-            border-radius: 1.5rem;
-            padding: 1rem;
+        .gallery-section h2 {
             text-align: center;
-            transition: transform 0.2s;
-            border: 1px solid rgba(230, 184, 76, 0.2);
-        }
-        .mini-item:hover {
-            transform: translateY(-4px);
+            font-size: 2rem;
+            font-weight: 700;
+            color: #E6B84C;
+            margin-bottom: 1.5rem;
         }
 
-        .mini-placeholder {
+        .gallery-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 2rem;
+            background: #FEFAC2;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(230, 184, 76, 0.15);
+        }
+
+        .gallery-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: #FEFAC2;
+        }
+
+        .gallery-slide .slide-placeholder {
             background: #B0CDD0;
-            border: 2px dashed #6e9599;
-            border-radius: 1rem;
-            height: 90px;
+            border: 3px dashed #6e9599;
+            border-radius: 1.5rem;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #1e4548;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-slide .slide-placeholder .big {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 0.3rem;
+        }
+
+        .gallery-slide h3 {
+            font-size: 1.5rem;
+            color: #1a2222;
+            margin-bottom: 0.2rem;
+        }
+
+        .gallery-slide p {
+            color: #4d6f71;
+            font-size: 1rem;
+        }
+
+        /* Gallery dots */
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.7rem;
+            padding: 1.2rem 0 0.5rem;
+        }
+
+        .gallery-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #B0CDD0;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .gallery-dot.active {
+            background: #E6B84C;
+            transform: scale(1.3);
+            width: 28px;
+            border-radius: 10px;
+        }
+
+        .gallery-dot:hover {
+            background: #E6B84C;
+            opacity: 0.7;
+        }
+
+        /* Gallery arrows */
+        .gallery-arrows {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .gallery-arrow {
+            background: #E6B84C;
+            border: none;
+            color: #1a2222;
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
-            color: #1e4548;
-            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(230, 184, 76, 0.3);
+            font-weight: 300;
         }
 
-        .mini-item h4 {
-            font-size: 1rem;
-            margin: 0.5rem 0 0.1rem;
-            color: #1a2222;
+        .gallery-arrow:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(230, 184, 76, 0.5);
         }
-        .mini-item p {
-            font-size: 0.8rem;
-            color: #4d6f71;
+
+        .gallery-arrow:active {
+            transform: scale(0.95);
         }
 
         /* ─────────── MENU / ABOUT / CONTACT SECTIONS ─────────── */
@@ -359,10 +447,6 @@
                 gap: 1.2rem;
                 font-size: 0.95rem;
             }
-            .mini-grid {
-                grid-template-columns: 1fr;
-                max-width: 300px;
-            }
             .info-grid {
                 grid-template-columns: 1fr;
             }
@@ -371,6 +455,17 @@
             }
             .banner-placeholder p {
                 font-size: 1.1rem;
+            }
+            .gallery-slide .slide-placeholder {
+                height: 200px;
+            }
+            .gallery-slide .slide-placeholder .big {
+                font-size: 2rem;
+            }
+            .gallery-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1.4rem;
             }
         }
 
@@ -385,6 +480,9 @@
             .btn {
                 padding: 0.7rem 2rem;
                 font-size: 0.9rem;
+            }
+            .gallery-slide .slide-placeholder {
+                height: 160px;
             }
         }
     </style>
@@ -419,24 +517,69 @@
                 <button class="btn btn-primary" id="orderBtn">Order Now</button>
                 <a href="#about" class="btn btn-secondary">Our Story</a>
             </div>
+        </section>
 
-            <!-- ─── 3 SMALL PLACEHOLDERS UNDER HERO ─── -->
-            <div class="mini-grid">
-                <div class="mini-item">
-                    <div class="mini-placeholder">Image</div>
-                    <h4>Fresh Baked Daily</h4>
-                    <p>Warm from the oven</p>
+        <!-- ═══ SLIDING GALLERY (replaces image placeholders) ═══ -->
+        <section class="gallery-section" id="gallery">
+            <h2>✦ Gallery</h2>
+            <div class="gallery-wrapper">
+                <div class="gallery-track" id="galleryTrack">
+
+                    <!-- Slide 1 -->
+                    <div class="gallery-slide">
+                        <div class="slide-placeholder">
+                            <span class="big">📸</span>
+                            Freshly Baked Bread
+                        </div>
+                        <h3>Artisan Sourdough</h3>
+                        <p>Baked fresh every morning</p>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="gallery-slide">
+                        <div class="slide-placeholder">
+                            <span class="big">📸</span>
+                            Coffee &amp; Pastry
+                        </div>
+                        <h3>Perfect Pairing</h3>
+                        <p>Single origin espresso + buttery croissant</p>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="gallery-slide">
+                        <div class="slide-placeholder">
+                            <span class="big">📸</span>
+                            Cozy Corner
+                        </div>
+                        <h3>Winter Atmosphere</h3>
+                        <p>Warm lighting, good books, better coffee</p>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="gallery-slide">
+                        <div class="slide-placeholder">
+                            <span class="big">📸</span>
+                            Sweet Treats
+                        </div>
+                        <h3>Cookie &amp; Cake Selection</h3>
+                        <p>Double chocolate, cinnamon, and more</p>
+                    </div>
+
                 </div>
-                <div class="mini-item">
-                    <div class="mini-placeholder">Image</div>
-                    <h4>Single Origin Coffee</h4>
-                    <p>Ethically sourced</p>
-                </div>
-                <div class="mini-item">
-                    <div class="mini-placeholder">Image</div>
-                    <h4>Cozy Atmosphere</h4>
-                    <p>Your winter hideaway</p>
-                </div>
+            </div>
+
+            <!-- Dots -->
+            <div class="gallery-dots" id="galleryDots">
+                <button class="gallery-dot active" data-index="0"></button>
+                <button class="gallery-dot" data-index="1"></button>
+                <button class="gallery-dot" data-index="2"></button>
+                <button class="gallery-dot" data-index="3"></button>
+            </div>
+
+            <!-- Arrows -->
+            <div class="gallery-arrows">
+                <button class="gallery-arrow" id="prevArrow">‹</button>
+                <button class="gallery-arrow" id="nextArrow">›</button>
             </div>
         </section>
 
@@ -513,7 +656,7 @@
     </div>
 
     <script>
-        // ─── BURST STICKERS ON CLICK ───
+        // ─── BURST STICKERS ON CLICK (slower) ───
         document.getElementById('orderBtn').addEventListener('click', function(e) {
             const rect = this.getBoundingClientRect();
             const cx = rect.left + rect.width / 2;
@@ -538,14 +681,64 @@
                 sticker.style.fontSize = size + 'rem';
                 sticker.style.setProperty('--tx', tx + 'px');
                 sticker.style.setProperty('--ty', ty + 'px');
-                sticker.style.animationDuration = (0.8 + Math.random() * 0.8) + 's';
 
                 container.appendChild(sticker);
 
-                // Remove after animation
                 setTimeout(() => {
                     sticker.remove();
-                }, 1800);
+                }, 2800);
+            }
+        });
+
+        // ─── GALLERY SLIDER ───
+        const track = document.getElementById('galleryTrack');
+        const dots = document.querySelectorAll('.gallery-dot');
+        const prevBtn = document.getElementById('prevArrow');
+        const nextBtn = document.getElementById('nextArrow');
+        let currentIndex = 0;
+        const totalSlides = 4;
+
+        function updateGallery(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            currentIndex = index;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        dots.forEach((dot) => {
+            dot.addEventListener('click', function() {
+                updateGallery(parseInt(this.dataset.index));
+            });
+        });
+
+        prevBtn.addEventListener('click', () => updateGallery(currentIndex - 1));
+        nextBtn.addEventListener('click', () => updateGallery(currentIndex + 1));
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') updateGallery(currentIndex - 1);
+            if (e.key === 'ArrowRight') updateGallery(currentIndex + 1);
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const wrapper = document.querySelector('.gallery-wrapper');
+
+        wrapper.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        wrapper.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) updateGallery(currentIndex + 1);
+                else updateGallery(currentIndex - 1);
             }
         });
     </script>
