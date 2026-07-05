@@ -114,6 +114,8 @@
             justify-content: center;
             flex-wrap: wrap;
         }
+
+        /* ─── GLOSSY WATERY BLURRY BUTTONS ─── */
         .btn {
             padding: 0.9rem 3rem;
             border-radius: 60px;
@@ -123,26 +125,101 @@
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             position: relative;
-            overflow: visible;
-        }
-        .btn-primary {
-            background: #E6B84C;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
             color: #1a2222;
-            box-shadow: 0 10px 28px rgba(230, 184, 76, 0.4);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
         }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle at 30% 30%,
+                rgba(255, 255, 255, 0.4) 0%,
+                rgba(255, 255, 255, 0.05) 60%,
+                transparent 100%
+            );
+            pointer-events: none;
+            animation: glossyShine 4s ease-in-out infinite;
+        }
+
+        @keyframes glossyShine {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(10%, 10%) rotate(5deg);
+                opacity: 1;
+            }
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 60px;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.25) 0%,
+                transparent 40%,
+                transparent 60%,
+                rgba(255, 255, 255, 0.1) 100%
+            );
+            pointer-events: none;
+        }
+
+        .btn-primary {
+            background: rgba(230, 184, 76, 0.35);
+            border-color: rgba(230, 184, 76, 0.4);
+            box-shadow: 
+                0 8px 32px rgba(230, 184, 76, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+        }
+
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 16px 40px rgba(230, 184, 76, 0.55);
+            background: rgba(230, 184, 76, 0.5);
+            box-shadow: 
+                0 16px 48px rgba(230, 184, 76, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
         }
+
         .btn-secondary {
-            background: #B0CDD0;
-            color: #1a2222;
+            background: rgba(176, 205, 208, 0.35);
+            border-color: rgba(176, 205, 208, 0.4);
+            box-shadow: 
+                0 8px 32px rgba(176, 205, 208, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
         }
+
         .btn-secondary:hover {
             transform: translateY(-3px) scale(1.02);
-            background: #9dbec2;
+            background: rgba(176, 205, 208, 0.5);
+            box-shadow: 
+                0 16px 48px rgba(176, 205, 208, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
         }
 
         /* ─────────── BURST STICKERS ─────────── */
@@ -176,7 +253,7 @@
             }
         }
 
-        /* ─────────── MENU SECTION (categorized) ─────────── */
+        /* ─────────── SLIDING MENU (horizontal scroll per category) ─────────── */
         .menu-section {
             margin: 2rem 0 1.5rem;
         }
@@ -203,25 +280,58 @@
             display: inline-block;
         }
 
-        .menu-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        /* Horizontal sliding wrapper */
+        .menu-slider-wrapper {
+            position: relative;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0.5rem 0 1.5rem;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #E6B84C #B0CDD0;
+            border-radius: 1.5rem;
+        }
+
+        .menu-slider-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .menu-slider-wrapper::-webkit-scrollbar-track {
+            background: #B0CDD0;
+            border-radius: 10px;
+        }
+
+        .menu-slider-wrapper::-webkit-scrollbar-thumb {
+            background: #E6B84C;
+            border-radius: 10px;
+        }
+
+        .menu-slider {
+            display: flex;
             gap: 1.2rem;
+            padding: 0.2rem 0.5rem;
+            min-width: max-content;
         }
 
         .menu-item {
-            padding: 1.2rem 1.5rem;
+            min-width: 200px;
+            padding: 1.2rem 1.8rem;
             border-radius: 1.5rem;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
             transition: transform 0.2s, box-shadow 0.2s;
             cursor: default;
+            flex-shrink: 0;
+            text-align: center;
         }
 
         .menu-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
         }
 
         .menu-item .name {
@@ -234,12 +344,16 @@
             font-weight: 700;
             color: #1a2222;
             background: rgba(255, 255, 255, 0.4);
-            padding: 0.2rem 0.8rem;
+            padding: 0.15rem 0.8rem;
             border-radius: 30px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
-        /* Color alternation */
+        .menu-item .emoji {
+            font-size: 1.6rem;
+        }
+
+        /* Color alternation for items */
         .menu-item.creamy-blue {
             background: #B0CDD0;
         }
@@ -353,8 +467,10 @@
         }
 
         .gallery-arrow {
-            background: #E6B84C;
-            border: none;
+            background: rgba(230, 184, 76, 0.3);
+            border: 1px solid rgba(230, 184, 76, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             color: #1a2222;
             font-size: 1.8rem;
             width: 50px;
@@ -365,13 +481,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(230, 184, 76, 0.3);
+            box-shadow: 0 4px 20px rgba(230, 184, 76, 0.1);
             font-weight: 300;
         }
 
         .gallery-arrow:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(230, 184, 76, 0.5);
+            background: rgba(230, 184, 76, 0.5);
+            box-shadow: 0 8px 30px rgba(230, 184, 76, 0.2);
         }
 
         .gallery-arrow:active {
@@ -387,11 +504,14 @@
         }
 
         .info-card {
-            background: #FEFAC2;
+            background: rgba(254, 250, 194, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 2rem;
             padding: 2rem 1.5rem;
-            border: 1px solid rgba(172, 205, 208, 0.3);
+            border: 1px solid rgba(172, 205, 208, 0.2);
             transition: transform 0.2s;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
         }
         .info-card:hover {
             transform: translateY(-5px);
@@ -429,8 +549,10 @@
 
         /* ─────────── BANNER PLACEHOLDER ─────────── */
         .banner-placeholder {
-            background: #FEFAC2;
-            border: 3px dashed #E6B84C;
+            background: rgba(254, 250, 194, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px dashed rgba(230, 184, 76, 0.3);
             border-radius: 2.5rem;
             padding: 3.5rem 2rem;
             text-align: center;
@@ -438,7 +560,7 @@
             transition: background 0.2s;
         }
         .banner-placeholder:hover {
-            background: #fef8d0;
+            background: rgba(254, 250, 194, 0.7);
         }
         .banner-placeholder p {
             font-size: 1.4rem;
@@ -497,8 +619,9 @@
                 gap: 1.2rem;
                 font-size: 0.95rem;
             }
-            .menu-items {
-                grid-template-columns: 1fr;
+            .menu-item {
+                min-width: 160px;
+                padding: 1rem 1.2rem;
             }
             .info-grid {
                 grid-template-columns: 1fr;
@@ -533,6 +656,10 @@
             .btn {
                 padding: 0.7rem 2rem;
                 font-size: 0.9rem;
+            }
+            .menu-item {
+                min-width: 140px;
+                padding: 0.8rem 1rem;
             }
             .gallery-slide .slide-placeholder {
                 height: 160px;
@@ -572,83 +699,128 @@
             </div>
         </section>
 
-        <!-- ═══ MENU SECTION (categorized, moved up) ═══ -->
+        <!-- ═══ SLIDING MENU (horizontal scroll per category) ═══ -->
         <section class="menu-section" id="menu">
             <h2>✦ Our Menu</h2>
 
             <!-- Drinks -->
             <div class="menu-category">
                 <h3>☕ Drinks</h3>
-                <div class="menu-items">
-                    <div class="menu-item creamy-blue">
-                        <span class="name">Hazelnut Latte</span>
-                        <span class="price">$5.50</span>
-                    </div>
-                    <div class="menu-item creamy-yellow">
-                        <span class="name">Matcha Tea</span>
-                        <span class="price">$4.25</span>
-                    </div>
-                    <div class="menu-item creamy-blue">
-                        <span class="name">Cappuccino</span>
-                        <span class="price">$4.75</span>
-                    </div>
-                    <div class="menu-item creamy-yellow">
-                        <span class="name">Hot Chocolate</span>
-                        <span class="price">$5.00</span>
-                    </div>
-                    <div class="menu-item creamy-blue">
-                        <span class="name">Iced Americano</span>
-                        <span class="price">$4.00</span>
+                <div class="menu-slider-wrapper">
+                    <div class="menu-slider">
+                        <div class="menu-item creamy-blue">
+                            <span class="emoji">☕</span>
+                            <span class="name">Hazelnut Latte</span>
+                            <span class="price">$5.50</span>
+                        </div>
+                        <div class="menu-item creamy-yellow">
+                            <span class="emoji">🍵</span>
+                            <span class="name">Matcha Tea</span>
+                            <span class="price">$4.25</span>
+                        </div>
+                        <div class="menu-item creamy-blue">
+                            <span class="emoji">☕</span>
+                            <span class="name">Cappuccino</span>
+                            <span class="price">$4.75</span>
+                        </div>
+                        <div class="menu-item creamy-yellow">
+                            <span class="emoji">🍫</span>
+                            <span class="name">Hot Chocolate</span>
+                            <span class="price">$5.00</span>
+                        </div>
+                        <div class="menu-item creamy-blue">
+                            <span class="emoji">🧊</span>
+                            <span class="name">Iced Americano</span>
+                            <span class="price">$4.00</span>
+                        </div>
+                        <div class="menu-item creamy-yellow">
+                            <span class="emoji">☕</span>
+                            <span class="name">Caramel Macchiato</span>
+                            <span class="price">$5.75</span>
+                        </div>
+                        <div class="menu-item creamy-blue">
+                            <span class="emoji">🫖</span>
+                            <span class="name">Earl Grey Tea</span>
+                            <span class="price">$3.75</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Food / Bakery -->
+            <!-- Bakery -->
             <div class="menu-category">
                 <h3>🥐 Bakery</h3>
-                <div class="menu-items">
-                    <div class="menu-item creamy-yellow">
-                        <span class="name">Butter Croissant</span>
-                        <span class="price">$4.50</span>
-                    </div>
-                    <div class="menu-item creamy-blue">
-                        <span class="name">Sourdough Loaf</span>
-                        <span class="price">$6.00</span>
-                    </div>
-                    <div class="menu-item creamy-yellow">
-                        <span class="name">Baguette</span>
-                        <span class="price">$5.00</span>
-                    </div>
-                    <div class="menu-item creamy-blue">
-                        <span class="name">Cinnamon Roll</span>
-                        <span class="price">$4.75</span>
+                <div class="menu-slider-wrapper">
+                    <div class="menu-slider">
+                        <div class="menu-item creamy-yellow">
+                            <span class="emoji">🥐</span>
+                            <span class="name">Butter Croissant</span>
+                            <span class="price">$4.50</span>
+                        </div>
+                        <div class="menu-item creamy-blue">
+                            <span class="emoji">🍞</span>
+                            <span class="name">Sourdough Loaf</span>
+                            <span class="price">$6.00</span>
+                        </div>
+                        <div class="menu-item creamy-yellow">
+                            <span class="emoji">🥖</span>
+                            <span class="name">Baguette</span>
+                            <span class="price">$5.00</span>
+                        </div>
+                        <div class="menu-item creamy-blue">
+                            <span class="emoji">🫓</span>
+                            <span class="name">Cinnamon Roll</span>
+                            <span class="price">$4.75</span>
+                        </div>
+                        <div class="menu-item creamy-yellow">
+                            <span class="emoji">🥯</span>
+                            <span class="name">Everything Bagel</span>
+                            <span class="price">$4.25</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Pastry / Sweets -->
+            <!-- Pastry & Sweets -->
             <div class="menu-category">
                 <h3>🍰 Pastry &amp; Sweets</h3>
-                <div class="menu-items">
-                    <div class="menu-item creamy-blue">
-                        <span class="name">Double Choc Cookie</span>
-                        <span class="price">$3.50</span>
-                    </div>
-                    <div class="menu-item creamy-yellow">
-                        <span class="name">Almond Danish</span>
-                        <span class="price">$4.25</span>
-                    </div>
-                    <div class="menu-item creamy-blue">
-                        <span class="name">Pecan Tart</span>
-                        <span class="price">$5.25</span>
-                    </div>
-                    <div class="menu-item creamy-yellow">
-                        <span class="name">Vanilla Muffin</span>
-                        <span class="price">$3.75</span>
-                    </div>
-                    <div class="menu-item creamy-blue">
-                        <span class="name">Brownie</span>
-                        <span class="price">$4.00</span>
+                <div class="menu-slider-wrapper">
+                    <div class="menu-slider">
+                        <div class="menu-item creamy-blue">
+                            <span class="emoji">🍪</span>
+                            <span class="name">Double Choc Cookie</span>
+                            <span class="price">$3.50</span>
+                        </div>
+                        <div class="menu-item creamy-yellow">
+                            <span class="emoji">🥐</span>
+                            <span class="name">Almond Danish</span>
+                            <span class="price">$4.25</span>
+                        </div>
+                        <div class="menu-item creamy-blue">
+                            <span class="emoji">🥧</span>
+                            <span class="name">Pecan Tart</span>
+                            <span class="price">$5.25</span>
+                        </div>
+                        <div class="menu-item creamy-yellow">
+                            <span class="emoji">🧁</span>
+                            <span class="name">Vanilla Muffin</span>
+                            <span class="price">$3.75</span>
+                        </div>
+                        <div class="menu-item creamy-blue">
+                            <span class="emoji">🍫</span>
+                            <span class="name">Brownie</span>
+                            <span class="price">$4.00</span>
+                        </div>
+                        <div class="menu-item creamy-yellow">
+                            <span class="emoji">🍩</span>
+                            <span class="name">Glazed Donut</span>
+                            <span class="price">$3.25</span>
+                        </div>
+                        <div class="menu-item creamy-blue">
+                            <span class="emoji">🎂</span>
+                            <span class="name">Carrot Cake Slice</span>
+                            <span class="price">$5.50</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -831,28 +1003,4 @@
         prevBtn.addEventListener('click', () => updateGallery(currentIndex - 1));
         nextBtn.addEventListener('click', () => updateGallery(currentIndex + 1));
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') updateGallery(currentIndex - 1);
-            if (e.key === 'ArrowRight') updateGallery(currentIndex + 1);
-        });
-
-        let touchStartX = 0;
-        let touchEndX = 0;
-        const wrapper = document.querySelector('.gallery-wrapper');
-
-        wrapper.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        wrapper.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            const diff = touchStartX - touchEndX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) updateGallery(currentIndex + 1);
-                else updateGallery(currentIndex - 1);
-            }
-        });
-    </script>
-
-</body>
-</html>
+        document.addEventListener('keydown',
