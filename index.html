@@ -1,1378 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Build Your Own — Fresh Bowls · Brunch · Pasta</title>
-<meta name="description" content="A build-your-own salad bar concept. Dine-in, take-out & delivery. Fresh bowls, brunch, pasta and more.">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Winter Hearth Bakery</title>
+    <style>
+        /* ─────────── RESET & BASE ─────────── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #D7EDEF;
+            color: #1e2e2f;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-<style>
-  :root{
-    --ink:#101a0e;
-    --ink-2:#182417;
-    --ink-3:#213021;
-    --ivory:#f7f2e4;
-    --ivory-dim:#e8e0cb;
-    --paper:#efe6cd;
-    --gold:#cc9a3a;
-    --gold-light:#e5c67c;
-    --olive:#5c6b3f;
-    --olive-light:#8a9a63;
-    --berry:#7d3230;
-    --line: rgba(247,242,228,0.14);
-    --line-dark: rgba(16,26,14,0.12);
-    --shadow: 0 30px 60px -25px rgba(0,0,0,0.55);
-    --ease: cubic-bezier(.16,.84,.44,1);
-  }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 3rem;
+            padding: 2.5rem;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.07);
+            border: 1px solid rgba(191, 223, 226, 0.3);
+        }
 
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+        /* ─────────── NAVIGATION ─────────── */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-bottom: 1.8rem;
+            border-bottom: 2px solid #BFDFE2;
+        }
 
-  body{
-    background:var(--ivory);
-    color:var(--ink);
-    font-family:'Work Sans', sans-serif;
-    font-weight:400;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .logo .highlight {
+            color: #FFD87B;
+        }
+        .logo .muted {
+            color: #BFDFE2;
+            font-weight: 300;
+        }
 
-  img{max-width:100%;display:block;}
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #1e2e2f;
+            transition: color 0.2s;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover {
+            color: #FFD87B;
+            border-bottom-color: #FFD87B;
+        }
 
-  h1,h2,h3,h4{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    line-height:1.08;
-    letter-spacing:-0.01em;
-  }
+        /* ─────────── HERO ─────────── */
+        .hero {
+            text-align: center;
+            padding: 3rem 0.5rem 2rem;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #FFD87B;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+        }
+        .hero h1 .cool {
+            color: #BFDFE2;
+            font-weight: 300;
+        }
+        .hero p {
+            font-size: 1.4rem;
+            color: #4d6f71;
+            margin: 0.8rem 0 2.2rem;
+            font-weight: 400;
+        }
 
-  .mono{
-    font-family:'IBM Plex Mono', monospace;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-  }
+        .btn-group {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.9rem 3rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+        .btn-primary {
+            background: #FFD87B;
+            color: #1a2728;
+            box-shadow: 0 10px 28px rgba(255, 216, 123, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(255, 216, 123, 0.55);
+        }
+        .btn-secondary {
+            background: #BFDFE2;
+            color: #1a2728;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: #aed3d7;
+        }
 
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11.5px;
-    letter-spacing:0.22em;
-    text-transform:uppercase;
-    color:var(--gold);
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-weight:500;
-  }
-  .eyebrow::before{
-    content:"";
-    width:28px;
-    height:1px;
-    background:var(--gold);
-    display:inline-block;
-  }
-  .eyebrow.center{justify-content:center;}
-  .eyebrow.dark{color:var(--olive);}
-  .eyebrow.dark::before{background:var(--olive);}
+        /* ─────────── SECTION TITLE ─────────── */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #FFD87B;
+            text-align: center;
+            margin: 3.5rem 0 1.8rem;
+            letter-spacing: -0.5px;
+        }
+        .section-title span {
+            background: #FEFAC2;
+            padding: 0.1rem 1.2rem;
+            border-radius: 60px;
+            display: inline-block;
+        }
 
-  a{color:inherit; text-decoration:none;}
-  ul{list-style:none;}
-  button{font-family:inherit; cursor:pointer;}
+        /* ─────────── 3-CARD GRID ─────────── */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
 
-  .wrap{
-    max-width:1240px;
-    margin:0 auto;
-    padding:0 clamp(20px, 5vw, 64px);
-  }
+        .card {
+            background: #FEFAC2;
+            border-radius: 2.2rem;
+            padding: 1.8rem 1.2rem 2rem;
+            text-align: center;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(255, 216, 123, 0.2);
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(191, 223, 226, 0.3);
+        }
 
-  section{position:relative;}
+        .placeholder-img {
+            background: #BFDFE2;
+            border: 3px dashed #7ba6aa;
+            border-radius: 1.5rem;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            color: #1e4548;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        .placeholder-img .tag {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+            font-size: 0.85rem;
+        }
 
-  ::selection{background:var(--gold); color:var(--ink);}
+        .card h3 {
+            font-size: 1.3rem;
+            color: #1e2e2f;
+            margin-bottom: 0.2rem;
+        }
+        .card p {
+            color: #4d6f71;
+            font-size: 0.95rem;
+        }
 
-  .reveal{opacity:0; transform:translateY(28px); transition:opacity .9s var(--ease), transform .9s var(--ease);}
-  .reveal.in{opacity:1; transform:translateY(0);}
-  .reveal-d1{transition-delay:.08s;}
-  .reveal-d2{transition-delay:.16s;}
-  .reveal-d3{transition-delay:.24s;}
-  .reveal-d4{transition-delay:.32s;}
+        /* ─────────── BANNER PLACEHOLDER ─────────── */
+        .banner-placeholder {
+            background: #FEFAC2;
+            border: 3px dashed #FFD87B;
+            border-radius: 2.5rem;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 2rem 0 2.5rem;
+            transition: background 0.2s;
+        }
+        .banner-placeholder:hover {
+            background: #fef8d0;
+        }
+        .banner-placeholder .big-icon {
+            font-size: 3.6rem;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+        .banner-placeholder p {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e4548;
+        }
+        .banner-placeholder small {
+            color: #7ba6aa;
+            font-weight: 500;
+            display: block;
+            margin-top: 0.2rem;
+            font-size: 0.95rem;
+        }
 
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:900;
-    padding:26px 0;
-    transition:padding .45s var(--ease), background .45s var(--ease), box-shadow .45s var(--ease);
-  }
-  header .wrap{
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  header.scrolled{
-    padding:14px 0;
-    background:rgba(16,26,14,0.92);
-    backdrop-filter:blur(14px);
-    box-shadow:0 10px 40px -20px rgba(0,0,0,0.6);
-  }
-  .brand{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-weight:500;
-    font-size:24px;
-    color:var(--ivory);
-    letter-spacing:0.01em;
-  }
-  .brand span{color:var(--gold);}
-  nav.links{
-    display:flex; gap:38px; align-items:center;
-  }
-  nav.links a{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--ivory-dim);
-    position:relative;
-    padding:4px 0;
-    transition:color .3s;
-  }
-  nav.links a::after{
-    content:"";
-    position:absolute; left:0; bottom:0;
-    width:0%; height:1px;
-    background:var(--gold);
-    transition:width .35s var(--ease);
-  }
-  nav.links a:hover{color:var(--ivory);}
-  nav.links a:hover::after{width:100%;}
+        /* ─────────── FOOTER ─────────── */
+        footer {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px solid #BFDFE2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: #4d6f71;
+            font-weight: 500;
+        }
+        .socials a {
+            text-decoration: none;
+            color: #1e2e2f;
+            margin-left: 1.5rem;
+            font-weight: 600;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+        .socials a:hover {
+            color: #FFD87B;
+        }
 
-  .nav-cta{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--ink);
-    background:var(--gold);
-    padding:12px 22px;
-    border-radius:2px;
-    transition:background .3s, transform .3s;
-    display:inline-block;
-  }
-  .nav-cta:hover{background:var(--gold-light); transform:translateY(-2px);}
+        /* ─────────── RESPONSIVE ─────────── */
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.5rem;
+                border-radius: 2rem;
+            }
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .logo {
+                font-size: 1.5rem;
+            }
+            .nav-links {
+                gap: 1.2rem;
+                font-size: 0.95rem;
+            }
+            .section-title {
+                font-size: 1.7rem;
+            }
+            .banner-placeholder {
+                padding: 2.5rem 1rem;
+            }
+            .banner-placeholder p {
+                font-size: 1.1rem;
+            }
+        }
 
-  .burger{
-    display:none;
-    width:26px; height:20px; position:relative; z-index:1000;
-    background:none; border:none;
-  }
-  .burger span{
-    display:block; position:absolute; left:0; width:100%; height:1.5px;
-    background:var(--ivory); transition:.35s var(--ease);
-  }
-  .burger span:nth-child(1){top:0;}
-  .burger span:nth-child(2){top:9px;}
-  .burger span:nth-child(3){top:18px;}
-  .burger.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
-  .burger.open span:nth-child(2){opacity:0;}
-  .burger.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
-
-  .mobile-panel{
-    position:fixed; inset:0; z-index:850;
-    background:var(--ink);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:28px;
-    transform:translateY(-100%);
-    transition:transform .5s var(--ease);
-  }
-  .mobile-panel.open{transform:translateY(0);}
-  .mobile-panel a{
-    font-family:'Fraunces', serif; font-size:30px; color:var(--ivory);
-  }
-
-  .hero{
-    min-height:100vh;
-    display:flex; align-items:flex-end;
-    position:relative;
-    background:linear-gradient(180deg, rgba(16,26,14,0.35) 0%, rgba(16,26,14,0.55) 55%, rgba(16,26,14,0.96) 100%), url('images/hero-bowls.JPG');
-    background-size:cover;
-    background-position:center 30%;
-    padding-bottom:90px;
-  }
-  .hero::before{
-    content:"";
-    position:absolute; inset:0;
-    background:radial-gradient(ellipse at top left, rgba(204,154,58,0.16), transparent 55%);
-  }
-  .hero-inner{
-    position:relative; z-index:2;
-    width:100%;
-  }
-  .hero-top-space{height:120px;}
-  .hero-eyebrow{
-    color:var(--gold-light);
-    margin-bottom:26px;
-  }
-  .hero-eyebrow::before{background:var(--gold-light);}
-  .hero h1{
-    font-size:clamp(52px, 9vw, 118px);
-    color:var(--ivory);
-    max-width:900px;
-  }
-  .hero h1 em{
-    font-style:italic;
-    color:var(--gold-light);
-    font-weight:400;
-  }
-  .hero-sub{
-    max-width:480px;
-    color:var(--ivory-dim);
-    font-size:16.5px;
-    margin-top:26px;
-    font-weight:300;
-  }
-  .hero-actions{
-    display:flex; gap:18px; margin-top:44px; flex-wrap:wrap;
-  }
-  .btn{
-    display:inline-flex; align-items:center; gap:10px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase;
-    padding:17px 30px;
-    border-radius:2px;
-    transition:all .4s var(--ease);
-    border:1px solid transparent;
-  }
-  .btn-solid{background:var(--gold); color:var(--ink);}
-  .btn-solid:hover{background:var(--ivory); transform:translateY(-3px); box-shadow:0 20px 40px -15px rgba(204,154,58,0.4);}
-  .btn-outline{border-color:rgba(247,242,228,0.35); color:var(--ivory);}
-  .btn-outline:hover{border-color:var(--ivory); background:rgba(247,242,228,0.08); transform:translateY(-3px);}
-
-  .hero-stats{
-    display:flex; gap:0; margin-top:70px;
-    border-top:1px solid var(--line);
-    padding-top:26px;
-    max-width:640px;
-    flex-wrap:wrap;
-  }
-  .hero-stats div{
-    flex:1; min-width:140px; padding-right:24px;
-  }
-  .hero-stats .num{
-    font-family:'Fraunces', serif; font-size:34px; color:var(--ivory);
-  }
-  .hero-stats .lab{
-    font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.12em;
-    text-transform:uppercase; color:var(--ivory-dim); margin-top:6px;
-  }
-
-  .strip{
-    background:var(--gold);
-    color:var(--ink);
-    overflow:hidden;
-    white-space:nowrap;
-    position:relative;
-    border-bottom:1px solid rgba(16,26,14,0.15);
-  }
-  .strip-track{
-    display:inline-flex;
-    animation:marquee 26s linear infinite;
-  }
-  .strip-track span{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    padding:14px 40px;
-    display:inline-flex;
-    align-items:center;
-    gap:14px;
-    font-weight:600;
-  }
-  .strip-track span::after{content:"✦"; opacity:0.6; margin-left:14px;}
-  @keyframes marquee{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
-  }
-
-  .section-pad{padding:130px 0;}
-  .section-head{
-    display:flex; justify-content:space-between; align-items:flex-end;
-    gap:40px; margin-bottom:70px; flex-wrap:wrap;
-  }
-  .section-head h2{font-size:clamp(36px, 4.4vw, 58px);}
-  .section-head p{max-width:340px; font-size:15px; color:var(--ink); opacity:0.65;}
-
-  .about{background:var(--ivory);}
-  .about-grid{
-    display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start;
-  }
-  .about-lead{
-    font-family:'Fraunces', serif;
-    font-size:clamp(26px, 2.6vw, 34px);
-    font-weight:400;
-    line-height:1.35;
-    color:var(--ink);
-  }
-  .about-lead em{color:var(--olive); font-style:italic;}
-  .about-copy{margin-top:26px; color:var(--ink); opacity:0.72; font-size:15.5px; max-width:460px;}
-  .about-facts{
-    display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:44px;
-  }
-  .fact{
-    border-top:1px solid var(--line-dark); padding-top:18px;
-  }
-  .fact .mono{font-size:10.5px; color:var(--olive); margin-bottom:8px; display:block;}
-  .fact p{font-size:14.5px; opacity:0.75;}
-
-  .about-photo{
-    position:relative;
-  }
-  .about-photo img{
-    width:100%; height:560px; object-fit:cover;
-    border-radius:2px;
-  }
-  .about-photo-tag{
-    position:absolute; bottom:-28px; left:-28px;
-    background:var(--ink); color:var(--ivory);
-    padding:26px 30px; max-width:260px;
-    box-shadow:var(--shadow);
-  }
-  .about-photo-tag .num{font-family:'Fraunces', serif; font-size:44px; color:var(--gold-light);}
-  .about-photo-tag p{font-size:12.5px; margin-top:6px; opacity:0.8; line-height:1.5;}
-
-  .signature{
-    background:var(--ink);
-    color:var(--ivory);
-    position:relative;
-  }
-  .signature::before{
-    content:"";
-    position:absolute; inset:0;
-    background:radial-gradient(circle at 85% 20%, rgba(92,107,63,0.35), transparent 45%);
-    pointer-events:none;
-  }
-  .signature .eyebrow{color:var(--gold-light);}
-  .signature .eyebrow::before{background:var(--gold-light);}
-  .signature .section-head h2{color:var(--ivory);}
-  .signature .section-head p{color:var(--ivory-dim); opacity:0.8;}
-
-  .steps{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-    position:relative; z-index:2;
-  }
-  .step{
-    background:var(--ink-2);
-    padding:44px 30px;
-    transition:background .4s var(--ease);
-  }
-  .step:hover{background:var(--ink-3);}
-  .step .step-no{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold);
-    margin-bottom:22px; display:block;
-  }
-  .step h3{font-size:21px; color:var(--ivory); margin-bottom:14px; font-weight:500;}
-  .step ul{font-size:13.5px; color:var(--ivory-dim); line-height:1.9; opacity:0.85;}
-
-  .menu{background:var(--paper);}
-  .menu-tabs{
-    display:flex; gap:10px; flex-wrap:wrap;
-    margin-bottom:56px;
-    border-bottom:1px solid var(--line-dark);
-    padding-bottom:0;
-  }
-  .menu-tab{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase;
-    padding:14px 4px; margin-right:26px;
-    color:rgba(16,26,14,0.45);
-    position:relative;
-    background:none; border:none;
-    transition:color .3s;
-  }
-  .menu-tab::after{
-    content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px;
-    background:var(--gold); transform:scaleX(0); transform-origin:left;
-    transition:transform .4s var(--ease);
-  }
-  .menu-tab.active{color:var(--ink);}
-  .menu-tab.active::after{transform:scaleX(1);}
-  .menu-tab:hover{color:var(--ink);}
-
-  .menu-panel{display:none;}
-  .menu-panel.active{display:block; animation:fadeUp .5s var(--ease);}
-  @keyframes fadeUp{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
-
-  .menu-grid{
-    display:grid; grid-template-columns:1fr 1fr; gap:0 60px;
-  }
-  .menu-item{
-    padding:22px 0;
-    border-bottom:1px solid var(--line-dark);
-  }
-  .menu-item-row{
-    display:flex; align-items:baseline; gap:10px;
-  }
-  .menu-item-row h4{
-    font-size:19px; font-weight:500; color:var(--ink); white-space:nowrap;
-  }
-  .dots{
-    flex:1; border-bottom:1.5px dotted rgba(16,26,14,0.3);
-    transform:translateY(-4px);
-  }
-  .price{
-    font-family:'IBM Plex Mono', monospace; font-size:14px; color:var(--berry); font-weight:500;
-    white-space:nowrap;
-  }
-  .menu-item p.desc{
-    font-size:13.5px; color:var(--ink); opacity:0.62; margin-top:6px; max-width:460px;
-  }
-  .menu-note{
-    margin-top:50px; padding-top:26px; border-top:1px solid var(--line-dark);
-    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.06em;
-    color:rgba(16,26,14,0.5); text-transform:uppercase;
-  }
-
-  .gallery{background:var(--ivory);}
-  .gallery-grid{
-    columns:4 260px; column-gap:18px;
-  }
-  .gallery-grid figure{
-    break-inside:avoid; margin-bottom:18px; position:relative;
-    overflow:hidden; border-radius:2px; cursor:pointer;
-  }
-  .gallery-grid img{
-    width:100%; display:block; transition:transform .7s var(--ease);
-  }
-  .gallery-grid figure:hover img{transform:scale(1.06);}
-  .gallery-grid figcaption{
-    position:absolute; left:0; right:0; bottom:0;
-    padding:20px 18px 16px;
-    background:linear-gradient(0deg, rgba(16,26,14,0.85), transparent);
-    color:var(--ivory);
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
-    opacity:0; transform:translateY(8px);
-    transition:all .4s var(--ease);
-  }
-  .gallery-grid figure:hover figcaption{opacity:1; transform:translateY(0);}
-
-  .lightbox{
-    position:fixed; inset:0; background:rgba(16,26,14,0.94); z-index:1200;
-    display:flex; align-items:center; justify-content:center;
-    opacity:0; pointer-events:none; transition:opacity .4s;
-    padding:40px;
-  }
-  .lightbox.open{opacity:1; pointer-events:auto;}
-  .lightbox img{max-width:min(900px,90vw); max-height:85vh; object-fit:contain; box-shadow:var(--shadow);}
-  .lightbox-close{
-    position:absolute; top:30px; right:40px; color:var(--ivory);
-    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.1em;
-    background:none; border:1px solid rgba(247,242,228,0.3); padding:10px 18px;
-  }
-
-  .story{
-    background:var(--ink);
-    color:var(--ivory);
-    padding:150px 0;
-    position:relative;
-  }
-  .story::after{
-    content:""; position:absolute; inset:0;
-    background:radial-gradient(circle at 15% 80%, rgba(204,154,58,0.14), transparent 50%);
-  }
-  .story-grid{
-    display:grid; grid-template-columns:0.9fr 1.1fr; gap:80px; align-items:center; position:relative; z-index:2;
-  }
-  .story blockquote{
-    font-family:'Fraunces', serif; font-style:italic; font-weight:400;
-    font-size:clamp(28px, 3vw, 40px); line-height:1.4; color:var(--ivory);
-  }
-  .story blockquote span{color:var(--gold-light);}
-  .story-copy{margin-top:30px; color:var(--ivory-dim); font-size:15px; max-width:480px; opacity:0.85;}
-  .story-photo{position:relative;}
-  .story-photo img{width:100%; height:520px; object-fit:cover; border-radius:2px;}
-  .story-frame{
-    position:absolute; top:24px; left:24px; right:-24px; bottom:-24px;
-    border:1px solid rgba(204,154,58,0.5); z-index:-1;
-  }
-
-  .testimonials{background:var(--paper);}
-  .test-grid{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
-    background:var(--line-dark); border:1px solid var(--line-dark);
-  }
-  .test-card{
-    background:var(--paper); padding:44px 34px;
-  }
-  .test-card .stars{color:var(--gold); font-size:13px; letter-spacing:3px; margin-bottom:22px;}
-  .test-card p.q{font-family:'Fraunces', serif; font-size:18px; font-style:italic; color:var(--ink); line-height:1.6;}
-  .test-card .who{
-    margin-top:24px; font-family:'IBM Plex Mono', monospace; font-size:11px;
-    letter-spacing:0.08em; text-transform:uppercase; color:var(--olive);
-  }
-
-  .reserve{background:var(--ivory);}
-  .reserve-grid{
-    display:grid; grid-template-columns:1fr 1fr; gap:80px;
-  }
-  .reserve-info h2{font-size:clamp(36px,4.4vw,54px); margin-bottom:20px;}
-  .reserve-info p{font-size:15.5px; opacity:0.7; max-width:420px;}
-  .reserve-hours{margin-top:44px;}
-  .hour-row{
-    display:flex; justify-content:space-between; padding:14px 0;
-    border-bottom:1px solid var(--line-dark);
-    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.04em;
-  }
-  .hour-row .day{color:var(--ink);}
-  .hour-row .time{color:var(--olive);}
-  .hour-row.closed .time{color:var(--berry);}
-
-  .whatsapp-cta{
-    margin-top:36px; display:inline-flex; align-items:center; gap:14px;
-    background:var(--ink); color:var(--ivory); padding:18px 26px; border-radius:2px;
-    transition:transform .35s var(--ease), background .35s;
-  }
-  .whatsapp-cta:hover{transform:translateY(-3px); background:var(--olive);}
-  .whatsapp-cta .mono{font-size:11px; color:var(--gold-light);}
-  .whatsapp-cta strong{display:block; font-family:'Fraunces',serif; font-size:18px; font-weight:500; margin-top:2px;}
-
-  .form-card{
-    background:var(--ink); padding:48px; border-radius:2px; color:var(--ivory);
-  }
-  .form-card .eyebrow{color:var(--gold-light); margin-bottom:26px;}
-  .form-card .eyebrow::before{background:var(--gold-light);}
-  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
-  .field{margin-bottom:22px;}
-  .field label{
-    font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.1em;
-    text-transform:uppercase; color:var(--ivory-dim); display:block; margin-bottom:10px;
-  }
-  .field input, .field select, .field textarea{
-    width:100%; background:transparent; border:none; border-bottom:1px solid rgba(247,242,228,0.28);
-    color:var(--ivory); font-family:'Work Sans', sans-serif; font-size:15px; padding:10px 2px;
-    outline:none; transition:border-color .3s;
-  }
-  .field select option{color:var(--ink);}
-  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--gold);}
-  .field input::placeholder, .field textarea::placeholder{color:rgba(247,242,228,0.35);}
-  .submit-btn{
-    width:100%; margin-top:10px; background:var(--gold); color:var(--ink);
-    padding:18px; border:none; font-family:'IBM Plex Mono', monospace; font-size:12px;
-    letter-spacing:0.14em; text-transform:uppercase; transition:background .3s, transform .3s;
-  }
-  .submit-btn:hover{background:var(--ivory); transform:translateY(-2px);}
-  .form-note{font-size:11.5px; color:var(--ivory-dim); opacity:0.6; margin-top:16px; text-align:center;}
-
-  .location{background:var(--olive); color:var(--ivory); position:relative; overflow:hidden;}
-  .location::before{
-    content:""; position:absolute; inset:0;
-    background:radial-gradient(circle at 80% 10%, rgba(16,26,14,0.25), transparent 50%);
-  }
-  .location .eyebrow{color:var(--ivory);}
-  .location .eyebrow::before{background:var(--ivory);}
-  .loc-grid{
-    display:grid; grid-template-columns:1.1fr 0.9fr; gap:70px; align-items:center; position:relative; z-index:2;
-  }
-  .loc-grid h2{color:var(--ivory); font-size:clamp(34px,4vw,50px);}
-  .loc-detail{
-    display:flex; gap:18px; padding:22px 0; border-top:1px solid rgba(247,242,228,0.25);
-  }
-  .loc-detail:last-child{border-bottom:1px solid rgba(247,242,228,0.25);}
-  .loc-detail .lab{
-    font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.1em;
-    text-transform:uppercase; color:var(--gold-light); width:110px; flex-shrink:0; padding-top:2px;
-  }
-  .loc-detail .val{font-size:15.5px; color:var(--ivory);}
-  .loc-detail .val a:hover{color:var(--gold-light);}
-
-  .map-card{
-    background:var(--ink); padding:36px; border-radius:2px;
-  }
-  .map-visual{
-    aspect-ratio:1/1; background:
-      repeating-linear-gradient(0deg, rgba(247,242,228,0.05) 0 1px, transparent 1px 42px),
-      repeating-linear-gradient(90deg, rgba(247,242,228,0.05) 0 1px, transparent 1px 42px),
-      var(--ink-2);
-    position:relative; border-radius:2px; overflow:hidden;
-  }
-  .map-pin{
-    position:absolute; top:50%; left:50%; transform:translate(-50%,-100%);
-    width:34px; height:34px; border-radius:50% 50% 50% 0; background:var(--berry);
-    transform:translate(-50%,-100%) rotate(-45deg);
-    box-shadow:0 10px 24px -6px rgba(0,0,0,0.6);
-  }
-  .map-pin::after{
-    content:""; position:absolute; top:9px; left:9px; width:14px; height:14px; border-radius:50%;
-    background:var(--ivory);
-  }
-  .map-card-label{
-    margin-top:22px; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ivory);
-    letter-spacing:0.04em;
-  }
-  .map-card-label span{display:block; color:var(--ivory-dim); font-size:11px; margin-top:4px;}
-
-  .social{background:var(--ink); color:var(--ivory); text-align:center;}
-  .social .eyebrow{justify-content:center; color:var(--gold-light); margin:0 auto 24px;}
-  .social .eyebrow::before{background:var(--gold-light);}
-  .social h2{font-size:clamp(34px,5vw,60px); color:var(--ivory); max-width:760px; margin:0 auto;}
-  .social-stats{
-    display:flex; justify-content:center; gap:70px; margin-top:56px; flex-wrap:wrap;
-  }
-  .social-stats div{text-align:center;}
-  .social-stats .num{font-family:'Fraunces', serif; font-size:44px; color:var(--gold-light);}
-  .social-stats .lab{font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ivory-dim); margin-top:8px;}
-
-  .highlight-row{
-    display:flex; justify-content:center; gap:22px; margin-top:64px; flex-wrap:wrap;
-  }
-  .highlight-chip{
-    display:flex; flex-direction:column; align-items:center; gap:14px;
-  }
-  .highlight-circle{
-    width:78px; height:78px; border-radius:50%;
-    border:1.5px solid var(--gold-light);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Fraunces', serif; font-style:italic; color:var(--gold-light); font-size:22px;
-    transition:transform .4s var(--ease), background .4s;
-  }
-  .highlight-chip:hover .highlight-circle{transform:scale(1.08); background:rgba(204,154,58,0.12);}
-  .highlight-chip span{font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ivory-dim);}
-
-  .social-cta{margin-top:60px;}
-
-  footer{background:var(--paper); padding:90px 0 34px;}
-  .foot-grid{
-    display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:50px;
-    padding-bottom:60px; border-bottom:1px solid var(--line-dark);
-  }
-  .foot-brand{font-family:'Fraunces', serif; font-style:italic; font-size:30px; color:var(--ink);}
-  .foot-brand span{color:var(--berry);}
-  .foot-tag{font-size:13.5px; opacity:0.6; margin-top:16px; max-width:240px;}
-  .foot-col h5{
-    font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.12em;
-    text-transform:uppercase; color:var(--olive); margin-bottom:20px;
-  }
-  .foot-col li{font-size:14px; margin-bottom:12px; opacity:0.75;}
-  .foot-col li a:hover{color:var(--berry); opacity:1;}
-  .foot-bottom{
-    display:flex; justify-content:space-between; align-items:center; padding-top:30px; flex-wrap:wrap; gap:14px;
-  }
-  .foot-bottom p{font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.06em; opacity:0.5;}
-
-  @media (max-width:980px){
-    nav.links, .nav-cta.desktop{display:none;}
-    .burger{display:block;}
-    .about-grid, .story-grid, .loc-grid, .reserve-grid{grid-template-columns:1fr; gap:48px;}
-    .steps{grid-template-columns:1fr 1fr;}
-    .test-grid{grid-template-columns:1fr;}
-    .foot-grid{grid-template-columns:1fr 1fr; gap:40px;}
-    .gallery-grid{columns:2 220px;}
-    .menu-grid{grid-template-columns:1fr;}
-  }
-  @media (max-width:640px){
-    .section-pad{padding:90px 0;}
-    .steps{grid-template-columns:1fr;}
-    .hero-stats{gap:20px;}
-    .about-photo-tag{left:0; bottom:-20px; padding:20px;}
-    .field-row{grid-template-columns:1fr;}
-    .foot-grid{grid-template-columns:1fr; gap:34px;}
-    .gallery-grid{columns:1 100%;}
-    .form-card{padding:30px 24px;}
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none !important; transition:none !important;}
-    .reveal{opacity:1; transform:none;}
-  }
-
-  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
-</style>
+        @media (max-width: 450px) {
+            body {
+                padding: 0.8rem;
+            }
+            .container {
+                padding: 1rem;
+                border-radius: 1.5rem;
+            }
+            .btn {
+                padding: 0.7rem 2rem;
+                font-size: 0.9rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header id="siteHeader">
-  <div class="wrap">
-    <a href="#top" class="brand">Your<span>'</span>s <span>Brand</span></a>
-    <nav class="links">
-      <a href="#about">About</a>
-      <a href="#menu">Menu</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#reserve">Reserve</a>
-      <a href="#location">Location</a>
+<div class="container">
+
+    <!-- ═══ NAVIGATION ═══ -->
+    <nav>
+        <div class="logo">
+            🍞 <span class="highlight">Winter</span><span class="muted">Hearth</span>
+        </div>
+        <div class="nav-links">
+            <a href="#">Menu</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
     </nav>
-    <a href="#reserve" class="nav-cta desktop">Book a Table</a>
-    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div>
-</header>
 
-<div class="mobile-panel" id="mobilePanel">
-  <a href="#about">About</a>
-  <a href="#menu">Menu</a>
-  <a href="#gallery">Gallery</a>
-  <a href="#reserve">Reserve</a>
-  <a href="#location">Location</a>
-  <a href="#reserve" style="color:#cc9a3a; font-style:italic;">Book a Table →</a>
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+        <h1>
+            ☕ Warmth <br class="mobile-break" />
+            <span class="cool">in every</span> bite
+        </h1>
+        <p>Fresh bread · slow coffee · winter comfort</p>
+        <div class="btn-group">
+            <a href="#" class="btn btn-primary">Order Now</a>
+            <a href="#" class="btn btn-secondary">View Menu</a>
+        </div>
+    </section>
+
+    <!-- ═══ 3-CARD GRID ═══ -->
+    <h2 class="section-title"><span>✦ Today's Favourites</span></h2>
+    <div class="card-grid">
+
+        <div class="card">
+            <div class="placeholder-img">
+                <span class="tag">📸 Your image here</span>
+            </div>
+            <h3>Butter Croissant</h3>
+            <p>Flaky · golden · fresh</p>
+        </div>
+
+        <div class="card">
+            <div class="placeholder-img">
+                <span class="tag">📸 Your image here</span>
+            </div>
+            <h3>Hazelnut Latte</h3>
+            <p>Warm · nutty · smooth</p>
+        </div>
+
+        <div class="card">
+            <div class="placeholder-img">
+                <span class="tag">📸 Your image here</span>
+            </div>
+            <h3>Double Choc Cookie</h3>
+            <p>Soft · chewy · rich</p>
+        </div>
+
+    </div>
+
+    <!-- ═══ LARGE BANNER PLACEHOLDER ═══ -->
+    <div class="banner-placeholder">
+        <span class="big-icon">🖼️</span>
+        <p>Your hero image placeholder here</p>
+        <small>1200 × 400 px · replace with your bakery shot</small>
+    </div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+        <div>© 2026 Winter Hearth Bakery</div>
+        <div class="socials">
+            <a href="#">IG</a>
+            <a href="#">FB</a>
+            <a href="#">TikTok</a>
+        </div>
+    </footer>
+
 </div>
-
-<section class="hero" id="top">
-  <div class="wrap hero-inner">
-    <div class="hero-top-space"></div>
-    <div class="eyebrow hero-eyebrow reveal">Salad Bar · Take-Out · Delivery</div>
-    <h1 class="reveal reveal-d1">Fresh, built<br><em>entirely</em> your way.</h1>
-    <p class="hero-sub reveal reveal-d2">A place that turns honest, colourful ingredients into bowls, brunch and pasta worth crossing town for.</p>
-    <div class="hero-actions reveal reveal-d3">
-      <a href="#reserve" class="btn btn-solid">Reserve a Table</a>
-      <a href="#menu" class="btn btn-outline">View the Menu</a>
-    </div>
-    <div class="hero-stats reveal reveal-d4">
-      <div><div class="num">6</div><div class="lab">Years Running</div></div>
-      <div><div class="num">5k+</div><div class="lab">Social Followers</div></div>
-      <div><div class="num">6 Days</div><div class="lab">Open Weekly</div></div>
-    </div>
-  </div>
-</section>
-
-<div class="strip">
-  <div class="strip-track">
-    <span>We're Turning 6 — Saturday, July 4th 2026 · 18:00–22:00</span>
-    <span>Join us for the celebration</span>
-    <span>We're Turning 6 — Saturday, July 4th 2026 · 18:00–22:00</span>
-    <span>Join us for the celebration</span>
-    <span>We're Turning 6 — Saturday, July 4th 2026 · 18:00–22:00</span>
-    <span>Join us for the celebration</span>
-  </div>
-</div>
-
-<section class="about section-pad" id="about">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="reveal">
-        <div class="eyebrow dark">The Concept</div>
-        <p class="about-lead" style="margin-top:24px;">A salad bar that treats <em>vegetables</em> like the main event — not the side you settle for.</p>
-        <p class="about-copy">What started as a small salad counter grew, one bowl at a time, into a full kitchen covering brunch, pasta, burgers and dessert — without ever losing the produce-first instinct that started it all. Every plate still begins the same way: fresh vegetables, prepared daily, arranged with care.</p>
-        <p class="about-copy">Today we serve dine-in, take-out and delivery, six days a week, from our kitchen.</p>
-        <div class="about-facts">
-          <div class="fact">
-            <span class="mono">Established</span>
-            <p>Six years serving the community, 2020 – 2026</p>
-          </div>
-          <div class="fact">
-            <span class="mono">Service</span>
-            <p>Dine-in, take-out &amp; delivery</p>
-          </div>
-          <div class="fact">
-            <span class="mono">Kitchen</span>
-            <p>Scratch-made, prepared fresh every service</p>
-          </div>
-          <div class="fact">
-            <span class="mono">Address</span>
-            <p>Your Street Address Here</p>
-          </div>
-        </div>
-      </div>
-      <div class="about-photo reveal reveal-d2">
-        <img src="chicken-salad-plate.JPG" alt="Grilled chicken salad with peanuts, radish and citrus dressing">
-        <div class="about-photo-tag">
-          <div class="num">01</div>
-          <p>Create Your Own Salad — the build we've served since day one.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="signature section-pad" id="signature">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow">The Signature Experience</div>
-        <h2 style="margin-top:20px;">Build Your Own,<br>in four moves.</h2>
-      </div>
-      <p>No two bowls look the same. Choose a base, a flavour, a protein and a dressing — the rest is up to you.</p>
-    </div>
-    <div class="steps reveal reveal-d1">
-      <div class="step">
-        <span class="step-no">01 · Veggies</span>
-        <h3>Pick a Base</h3>
-        <ul>
-          <li>Carrots</li>
-          <li>Broccoli</li>
-          <li>Red cabbage</li>
-          <li>Cucumber</li>
-          <li>Bell pepper</li>
-          <li>Tomato</li>
-          <li>Cauliflower</li>
-          <li>Arugula</li>
-        </ul>
-      </div>
-      <div class="step">
-        <span class="step-no">02 · Flavor</span>
-        <h3>Add Character</h3>
-        <ul>
-          <li>Feta</li>
-          <li>Red onion</li>
-          <li>Cranberry</li>
-          <li>Potato</li>
-          <li>Corn</li>
-          <li>Yuca</li>
-          <li>Almonds</li>
-          <li>Olives &amp; pickled ginger</li>
-        </ul>
-      </div>
-      <div class="step">
-        <span class="step-no">03 · Protein</span>
-        <h3>Choose Your Protein</h3>
-        <ul>
-          <li>Chicken</li>
-          <li>Beef</li>
-          <li>Egg</li>
-        </ul>
-      </div>
-      <div class="step">
-        <span class="step-no">04 · Dressing</span>
-        <h3>Finish It Off</h3>
-        <ul>
-          <li>Avocado yoghurt</li>
-          <li>Lemon</li>
-          <li>Soy</li>
-          <li>Yoghurt</li>
-          <li>Lemon mustard</li>
-          <li>Balsamic vinaigrette</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="menu section-pad" id="menu">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow dark">The Menu</div>
-        <h2 style="margin-top:20px;">Everything<br>we serve.</h2>
-      </div>
-      <p>All prices in local currency. Browse by course — starters through dessert.</p>
-    </div>
-
-    <div class="menu-tabs reveal">
-      <button class="menu-tab active" data-tab="starter">Starters</button>
-      <button class="menu-tab" data-tab="brunch">Brunch</button>
-      <button class="menu-tab" data-tab="bowls">Bowls</button>
-      <button class="menu-tab" data-tab="salads">Salads</button>
-      <button class="menu-tab" data-tab="pasta">Pasta</button>
-      <button class="menu-tab" data-tab="burgers">Burgers</button>
-      <button class="menu-tab" data-tab="sweets">Sliders &amp; Sweets</button>
-    </div>
-
-    <div class="menu-panel active" id="panel-starter">
-      <div class="menu-grid">
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Tuna Tartar</h4><span class="dots"></span><span class="price">350</span></div>
-          <p class="desc">Tuna, cucumber, lemon mayo, orange, chili flakes &amp; seaweed</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Garlic Mussels</h4><span class="dots"></span><span class="price">385</span></div>
-          <p class="desc">White wine butter sauce &amp; toast</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Nacho Poke</h4><span class="dots"></span><span class="price">365</span></div>
-          <p class="desc">Avocado, crispy wonton, cilantro, jalapeño, green onions &amp; sriracha mayo</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Spicy Honey Wings</h4><span class="dots"></span><span class="price">375</span></div>
-          <p class="desc">Fried sticky wings &amp; yoghurt sauce</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-panel" id="panel-brunch">
-      <div class="menu-grid">
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Chicken Pesto Bagel</h4><span class="dots"></span><span class="price">350</span></div>
-          <p class="desc">Chicken, brie, pesto, tomato &amp; lettuce</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Chicken Caesar Wrap</h4><span class="dots"></span><span class="price">325</span></div>
-          <p class="desc">Parmesan, red onions, lettuce &amp; creamy avocado sauce</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Egg Benedict Bagel</h4><span class="dots"></span><span class="price">355</span></div>
-          <p class="desc">Poached egg, turkey, lettuce &amp; hollandaise sauce</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Club Sandwich</h4><span class="dots"></span><span class="price">375</span></div>
-          <p class="desc">Turkey, chicken, cheese, arugula &amp; bacon</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Breakfast Bagel</h4><span class="dots"></span><span class="price">285</span></div>
-          <p class="desc">Cheesy omelette &amp; bacon</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Steak 'n Fries</h4><span class="dots"></span><span class="price">550</span></div>
-          <p class="desc">Steak, sweet potato fries, mushroom sauce or peppercorn sauce</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Smoked Salmon Croissant</h4><span class="dots"></span><span class="price">375</span></div>
-          <p class="desc">Avocado &amp; scrambled egg</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Caprese Toast</h4><span class="dots"></span><span class="price">285</span></div>
-          <p class="desc">Mozzarella, pesto, tomato &amp; balsamic</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-panel" id="panel-bowls">
-      <div class="menu-grid">
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Habibi Loves Hummus</h4><span class="dots"></span><span class="price">365</span></div>
-          <p class="desc">Falafel, beet hummus, turmeric cauliflower, pita, feta, tomato, chickpeas, cucumber &amp; yoghurt sauce</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Vietnamese Bowl</h4><span class="dots"></span><span class="price">from 355</span></div>
-          <p class="desc">Cabbage, carrots, rice noodles, fresh herbs, pepper, peanuts, crispy onions &amp; ginger soy — tempeh 355 / chicken 365 / beef 385 / shrimp 440 / salmon 685</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Mexican Bowl</h4><span class="dots"></span><span class="price">from 355</span></div>
-          <p class="desc">Black beans, corn, rice, sautéed bell pepper, jalapeño, guacamole, sour cream, pico de gallo &amp; lemon sauce — tempeh 355 / chicken 365 / beef 385 / shrimp 440 / salmon 685</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-panel" id="panel-salads">
-      <div class="menu-grid">
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Signature Salad</h4><span class="dots"></span><span class="price">from 365</span></div>
-          <p class="desc">Cauliflower, potato, tomato, chili flakes, basil, feta, peas, red onions &amp; lemon dressing — veggie 365 / chicken 375 / beef 400 / shrimp 465 / salmon 675</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Smoked Salmon Salad</h4><span class="dots"></span><span class="price">600</span></div>
-          <p class="desc">Egg, cranberry, tomato, arugula, red onions, walnuts &amp; lemon mustard sauce</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Pumpkin Salad</h4><span class="dots"></span><span class="price">355</span></div>
-          <p class="desc">Roasted pumpkin, quinoa, cranberry, tomato, feta, mixed nuts, red onions, lettuce, dates &amp; balsamic vinaigrette</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Caesar</h4><span class="dots"></span><span class="price">385</span></div>
-          <p class="desc">Avocado, egg, red onions, parmesan, croutons &amp; yoghurt dressing</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Steak 'n Egg</h4><span class="dots"></span><span class="price">425</span></div>
-          <p class="desc">Sunny side up egg, black beans, mozzarella, tomato, bell peppers, red onions, chimichurri &amp; lemon mustard</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-panel" id="panel-pasta">
-      <div class="menu-grid">
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Shrimp Spaghetti</h4><span class="dots"></span><span class="price">440</span></div>
-          <p class="desc">Tomato &amp; red onions — gluten free available</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Pesto Pasta</h4><span class="dots"></span><span class="price">from 355</span></div>
-          <p class="desc">Tomato, olives, cheese, chickpeas, lettuce &amp; lemon sauce — veggie 355 / chicken 395 / beef 435 / shrimp 455 / salmon 695</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Spaghetti Vongole</h4><span class="dots"></span><span class="price">455</span></div>
-          <p class="desc">White wine butter sauce, parsley, chili flakes — gluten free available</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Alfredo Pasta</h4><span class="dots"></span><span class="price">from 350</span></div>
-          <p class="desc">Creamy cheesy pasta with veggies — veggie 350 / chicken 390 / beef 430 / shrimp 455 / salmon 695</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-panel" id="panel-burgers">
-      <div class="menu-grid">
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Vegan</h4><span class="dots"></span><span class="price">385</span></div>
-          <p class="desc">Black bean pattie, tomato, guacamole, bell pepper, cashew mayo &amp; sweet potato fries</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Beef</h4><span class="dots"></span><span class="price">440</span></div>
-          <p class="desc">Aioli, caramelized onions, cucumber, tomato &amp; sweet potato fries</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Chicken</h4><span class="dots"></span><span class="price">425</span></div>
-          <p class="desc">Aioli, caramelized onions, cucumber, tomato &amp; sweet potato fries</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Skinny</h4><span class="dots"></span><span class="price">445</span></div>
-          <p class="desc">Lettuce-wrapped beef pattie, sautéed onions, tomato, cucumber, ranch &amp; sweet potato fries</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Shrimp</h4><span class="dots"></span><span class="price">455</span></div>
-          <p class="desc">Tartar sauce, tomato, cucumber &amp; sweet potato fries</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-panel" id="panel-sweets">
-      <div class="menu-grid">
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Sliders — Beef</h4><span class="dots"></span><span class="price">440</span></div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Sliders — Chicken</h4><span class="dots"></span><span class="price">425</span></div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Basque Cheesecake</h4><span class="dots"></span><span class="price">250</span></div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Creme Brûlée</h4><span class="dots"></span><span class="price">255</span></div>
-          <p class="desc">Cream custard &amp; fresh fruits</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Giant Chocolate Chip Cookie</h4><span class="dots"></span><span class="price">175</span></div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Cinnamon Rolls</h4><span class="dots"></span><span class="price">155</span></div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Matilda, 6 Inch</h4><span class="dots"></span><span class="price">250</span></div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Sgroppino</h4><span class="dots"></span><span class="price">275</span></div>
-          <p class="desc">Lemon sorbet &amp; prosecco</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Tutti Fruity Smoothie</h4><span class="dots"></span><span class="price">150</span></div>
-          <p class="desc">Passion fruit, strawberry, apple, pineapple &amp; banana</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-row"><h4>Dessert of the Day</h4><span class="dots"></span><span class="price">Ask us</span></div>
-        </div>
-      </div>
-    </div>
-
-    <p class="menu-note reveal">Prices are exclusive of 10% sales tax &amp; 5% service charge</p>
-  </div>
-</section>
-
-<section class="gallery section-pad" id="gallery">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow dark">From the Kitchen</div>
-        <h2 style="margin-top:20px;">A closer look.</h2>
-      </div>
-      <p>A glimpse of what leaves our kitchen every day — shared straight from our counter.</p>
-    </div>
-    <div class="gallery-grid reveal">
-      <figure data-full="hero-bowls.JPG"><img src="hero-bowls.JPG" alt="Shrimp, grilled chicken and Mexican bowls" loading="lazy"><figcaption>Build-Your-Own Bowls</figcaption></figure>
-      <figure data-full="shrimp-salad.JPG"><img src="shrimp-salad.JPG" alt="Grilled shrimp salad with olives and chickpeas" loading="lazy"><figcaption>Grilled Shrimp Salad</figcaption></figure>
-      <figure data-full="falafel-bowls.JPG"><img src="falafel-bowls.JPG" alt="Falafel bowls with pita and pickled vegetables" loading="lazy"><figcaption>Habibi Loves Hummus</figcaption></figure>
-      <figure data-full="veggie-burger.JPG"><img src="veggie-burger.JPG" alt="Vegan burger with mango salsa and sweet potato fries" loading="lazy"><figcaption>The Vegan Burger</figcaption></figure>
-      <figure data-full="chicken-salad-boxes.JPG"><img src="chicken-salad-boxes.JPG" alt="Signature Salad boxed for take-out" loading="lazy"><figcaption>Signature Salad, To Go</figcaption></figure>
-      <figure data-full="salad-bar-toppings.JPG"><img src="salad-bar-toppings.JPG" alt="Salad bar toppings station with fresh ingredients" loading="lazy"><figcaption>Build-Your-Own Station</figcaption></figure>
-      <figure data-full="tiramisu.JPG"><img src="tiramisu.JPG" alt="Tiramisu cake sliced and dusted with cocoa" loading="lazy"><figcaption>Tiramisu</figcaption></figure>
-      <figure data-full="pastry-rolls.JPG"><img src="pastry-rolls.JPG" alt="Chocolate swirl pastry rolls" loading="lazy"><figcaption>Chocolate Swirl Rolls</figcaption></figure>
-      <figure data-full="cookies.JPG"><img src="cookies.JPG" alt="Giant chocolate chip cookies on a plate" loading="lazy"><figcaption>Giant Chocolate Chip Cookies</figcaption></figure>
-      <figure data-full="red-velvet-bars.JPG"><img src="red-velvet-bars.JPG" alt="Red velvet bars with white chocolate drizzle" loading="lazy"><figcaption>Red Velvet Bars</figcaption></figure>
-      <figure data-full="chicken-salad-plate.JPG"><img src="chicken-salad-plate.JPG" alt="Chicken salad plate with citrus dressing" loading="lazy"><figcaption>Grilled Chicken Salad</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<section class="story" id="story">
-  <div class="wrap">
-    <div class="story-grid">
-      <div class="reveal">
-        <blockquote>We don't chase trends. We chase <span>the vegetable that's ripest this week</span> — and build the plate around it.</blockquote>
-        <p class="story-copy">Behind the counter, our kitchen preps every base, sauce and dressing from scratch, every single service day. Nothing sits pre-made in a walk-in for a week — it's cut, cooked and dressed the day it reaches your table, whether you're dining in, picking up, or ordering delivery.</p>
-        <p class="story-copy">That discipline is the whole reason a salad counter has grown, six years on, into a full kitchen — and it's still the standard we hold ourselves to on every single order.</p>
-      </div>
-      <div class="story-photo reveal reveal-d2">
-        <div class="story-frame"></div>
-        <img src="salad-bar-toppings.JPG" alt="Fresh toppings prepared at the build-your-own station">
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="testimonials section-pad">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow dark">Word of Mouth</div>
-        <h2 style="margin-top:20px;">What guests<br>are saying.</h2>
-      </div>
-    </div>
-    <div class="test-grid reveal">
-      <div class="test-card">
-        <div class="stars">★★★★★</div>
-        <p class="q">"The build-your-own salad is unreal — I've never had the same bowl twice in six months of ordering."</p>
-        <div class="who">— Regular Guest</div>
-      </div>
-      <div class="test-card">
-        <div class="stars">★★★★★</div>
-        <p class="q">"Fast, fresh, and the shrimp spaghetti alone is worth the trip. Our office orders every Friday."</p>
-        <div class="who">— Delivery Customer</div>
-      </div>
-      <div class="test-card">
-        <div class="stars">★★★★★</div>
-        <p class="q">"Six years in and it still feels like a neighbourhood find. The cinnamon rolls are dangerous."</p>
-        <div class="who">— Dine-In Guest</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="reserve section-pad" id="reserve">
-  <div class="wrap">
-    <div class="reserve-grid">
-      <div class="reveal">
-        <div class="eyebrow dark">Reserve</div>
-        <h2 style="margin-top:20px;">Save your table.</h2>
-        <p>Send us a request and we'll confirm by phone or WhatsApp. For same-day tables, WhatsApp is fastest.</p>
-
-        <div class="reserve-hours">
-          <div class="hour-row"><span class="day">Monday</span><span class="time">12:00 – 15:00</span></div>
-          <div class="hour-row"><span class="day">Tuesday – Saturday</span><span class="time">9:00 – 15:00</span></div>
-          <div class="hour-row closed"><span class="day">Sunday</span><span class="time">Closed</span></div>
-        </div>
-
-        <a href="#" target="_blank" rel="noopener" class="whatsapp-cta">
-          <div>
-            <span class="mono">Prefer to talk?</span>
-            <strong>WhatsApp +123 456-7890</strong>
-          </div>
-        </a>
-      </div>
-
-      <form class="form-card reveal reveal-d2" id="reserveForm">
-        <div class="eyebrow">Booking Request</div>
-        <div class="field-row">
-          <div class="field">
-            <label for="fname">Full Name</label>
-            <input type="text" id="fname" placeholder="Your name" required>
-          </div>
-          <div class="field">
-            <label for="fphone">Phone</label>
-            <input type="tel" id="fphone" placeholder="+123 ..." required>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="fdate">Date</label>
-            <input type="date" id="fdate" required>
-          </div>
-          <div class="field">
-            <label for="ftime">Time</label>
-            <input type="time" id="ftime" required>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="fparty">Party Size</label>
-            <select id="fparty">
-              <option>1 guest</option>
-              <option>2 guests</option>
-              <option>3 guests</option>
-              <option>4 guests</option>
-              <option>5+ guests</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="fservice">Service</label>
-            <select id="fservice">
-              <option>Dine-in</option>
-              <option>Take-out</option>
-              <option>Delivery</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label for="fnote">Notes (optional)</label>
-          <textarea id="fnote" rows="2" placeholder="Allergies, occasion, anything we should know"></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Request Table</button>
-        <p class="form-note">We'll confirm your reservation by phone or WhatsApp within one business day.</p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<section class="location section-pad" id="location">
-  <div class="wrap">
-    <div class="loc-grid">
-      <div class="reveal">
-        <div class="eyebrow">Find Us</div>
-        <h2 style="margin-top:20px;">Come say hello.</h2>
-
-        <div class="loc-detail">
-          <span class="lab">Address</span>
-          <span class="val">Your Street Address Here</span>
-        </div>
-        <div class="loc-detail">
-          <span class="lab">Call</span>
-          <span class="val"><a href="tel:+1234567890">+123 456-7890</a></span>
-        </div>
-        <div class="loc-detail">
-          <span class="lab">WhatsApp</span>
-          <span class="val"><a href="#" target="_blank" rel="noopener">+123 456-7890</a></span>
-        </div>
-        <div class="loc-detail">
-          <span class="lab">Email</span>
-          <span class="val"><a href="mailto:hello@example.com">hello@example.com</a></span>
-        </div>
-      </div>
-
-      <div class="map-card reveal reveal-d2">
-        <div class="map-visual">
-          <div class="map-pin"></div>
-        </div>
-        <div class="map-card-label">
-          Your Street Address Here
-          <span>Tap for directions in your maps app</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="social section-pad">
-  <div class="wrap">
-    <div class="eyebrow center reveal">Follow Along</div>
-    <h2 class="reveal reveal-d1">@yourhandle — daily menus, fresh builds and behind-the-counter moments.</h2>
-
-    <div class="social-stats reveal reveal-d2">
-      <div><div class="num">7k+</div><div class="lab">Posts</div></div>
-      <div><div class="num">5k+</div><div class="lab">Followers</div></div>
-      <div><div class="num">174</div><div class="lab">Following</div></div>
-    </div>
-
-    <div class="highlight-row reveal reveal-d3">
-      <div class="highlight-chip"><div class="highlight-circle">S</div><span>Salads</span></div>
-      <div class="highlight-chip"><div class="highlight-circle">F</div><span>Favorites</span></div>
-      <div class="highlight-chip"><div class="highlight-circle">M</div><span>Menu</span></div>
-      <div class="highlight-chip"><div class="highlight-circle">B</div><span>Build Your Own</span></div>
-    </div>
-
-    <div class="social-cta reveal reveal-d4">
-      <a href="#" target="_blank" rel="noopener" class="btn btn-solid">Follow on Instagram</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="foot-brand">Your<span>'</span>s Brand</div>
-        <p class="foot-tag">A build-your-own salad bar concept. Fresh bowls, brunch, pasta and more — six years running.</p>
-      </div>
-      <div class="foot-col">
-        <h5>Explore</h5>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#reserve">Reserve</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h5>Contact</h5>
-        <ul>
-          <li><a href="tel:+1234567890">+123 456-7890</a></li>
-          <li><a href="#" target="_blank" rel="noopener">WhatsApp</a></li>
-          <li><a href="mailto:hello@example.com">hello@example.com</a></li>
-          <li>Your Street Address Here</li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h5>Hours</h5>
-        <ul>
-          <li>Mon 12:00 – 15:00</li>
-          <li>Tue – Sat 9:00 – 15:00</li>
-          <li>Sunday closed</li>
-          <li><a href="#" target="_blank" rel="noopener">@yourhandle</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <p>© 2026 Your Brand. All rights reserved.</p>
-      <p>Salad Bar · Dine-in · Take-out · Delivery</p>
-    </div>
-  </div>
-</footer>
-
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose">Close ✕</button>
-  <img src="" alt="" id="lightboxImg">
-</div>
-
-<script>
-  const header = document.getElementById('siteHeader');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 40);
-  });
-
-  const burger = document.getElementById('burger');
-  const mobilePanel = document.getElementById('mobilePanel');
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open');
-    mobilePanel.classList.toggle('open');
-  });
-  mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    burger.classList.remove('open');
-    mobilePanel.classList.remove('open');
-  }));
-
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => io.observe(el));
-
-  const tabs = document.querySelectorAll('.menu-tab');
-  const panels = document.querySelectorAll('.menu-panel');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
-    });
-  });
-
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  document.querySelectorAll('.gallery-grid figure').forEach(fig => {
-    fig.addEventListener('click', () => {
-      lightboxImg.src = fig.dataset.full;
-      lightboxImg.alt = fig.querySelector('img').alt;
-      lightbox.classList.add('open');
-    });
-  });
-  document.getElementById('lightboxClose').addEventListener('click', () => lightbox.classList.remove('open'));
-  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
-
-  const form = document.getElementById('reserveForm');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn = form.querySelector('.submit-btn');
-    const original = btn.textContent;
-    btn.textContent = 'Request Sent ✓';
-    btn.style.background = '#8a9a63';
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.style.background = '';
-      form.reset();
-    }, 2600);
-  });
-</script>
 
 </body>
 </html>
