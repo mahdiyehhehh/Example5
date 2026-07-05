@@ -942,65 +942,71 @@
 
     <script>
         // ─── BURST STICKERS ON CLICK ───
-        document.getElementById('viewMenuBtn').addEventListener('click', function(e) {
-            const rect = this.getBoundingClientRect();
-            const cx = rect.left + rect.width / 2;
-            const cy = rect.top + rect.height / 2;
-            const container = document.getElementById('burstContainer');
-            const count = 28;
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('viewMenuBtn');
+            
+            btn.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+                const container = document.getElementById('burstContainer');
+                const count = 28;
 
-            for (let i = 0; i < count; i++) {
-                const sticker = document.createElement('div');
-                sticker.className = 'burst-sticker';
-                sticker.textContent = '☕';
+                for (let i = 0; i < count; i++) {
+                    const sticker = document.createElement('div');
+                    sticker.className = 'burst-sticker';
+                    sticker.textContent = '☕';
 
-                const angle = Math.random() * 2 * Math.PI;
-                const distance = 150 + Math.random() * 350;
-                const tx = Math.cos(angle) * distance;
-                const ty = Math.sin(angle) * distance - 100;
+                    const angle = Math.random() * 2 * Math.PI;
+                    const distance = 150 + Math.random() * 350;
+                    const tx = Math.cos(angle) * distance;
+                    const ty = Math.sin(angle) * distance - 100;
 
-                const size = 1.2 + Math.random() * 2.2;
+                    const size = 1.2 + Math.random() * 2.2;
 
-                sticker.style.left = cx + 'px';
-                sticker.style.top = cy + 'px';
-                sticker.style.fontSize = size + 'rem';
-                sticker.style.setProperty('--tx', tx + 'px');
-                sticker.style.setProperty('--ty', ty + 'px');
+                    sticker.style.left = cx + 'px';
+                    sticker.style.top = cy + 'px';
+                    sticker.style.fontSize = size + 'rem';
+                    sticker.style.setProperty('--tx', tx + 'px');
+                    sticker.style.setProperty('--ty', ty + 'px');
 
-                container.appendChild(sticker);
+                    container.appendChild(sticker);
 
-                setTimeout(() => {
-                    sticker.remove();
-                }, 2800);
+                    setTimeout(() => {
+                        if (sticker.parentNode) {
+                            sticker.remove();
+                        }
+                    }, 2800);
+                }
+            });
+
+            // ─── GALLERY SLIDER ───
+            const track = document.getElementById('galleryTrack');
+            const dots = document.querySelectorAll('.gallery-dot');
+            const prevBtn = document.getElementById('prevArrow');
+            const nextBtn = document.getElementById('nextArrow');
+            let currentIndex = 0;
+            const totalSlides = 4;
+
+            function updateGallery(index) {
+                if (index < 0) index = totalSlides - 1;
+                if (index >= totalSlides) index = 0;
+                currentIndex = index;
+                track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+
+                dots.forEach(function(dot, i) {
+                    if (i === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
             }
-        });
 
-        // ─── GALLERY SLIDER ───
-        const track = document.getElementById('galleryTrack');
-        const dots = document.querySelectorAll('.gallery-dot');
-        const prevBtn = document.getElementById('prevArrow');
-        const nextBtn = document.getElementById('nextArrow');
-        let currentIndex = 0;
-        const totalSlides = 4;
-
-        function updateGallery(index) {
-            if (index < 0) index = totalSlides - 1;
-            if (index >= totalSlides) index = 0;
-            currentIndex = index;
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
+            dots.forEach(function(dot) {
+                dot.addEventListener('click', function() {
+                    updateGallery(parseInt(this.dataset.index));
+                });
             });
-        }
 
-        dots.forEach((dot) => {
-            dot.addEventListener('click', function() {
-                updateGallery(parseInt(this.dataset.index));
-            });
-        });
-
-        prevBtn.addEventListener('click', () => updateGallery(currentIndex - 1));
-        nextBtn.addEventListener('click', () => updateGallery(currentIndex + 1));
-
-        document.addEventListener('keydown',
+            prevBtn.addEventListener('click', function()
