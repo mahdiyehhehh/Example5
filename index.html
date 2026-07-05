@@ -140,7 +140,7 @@
             background: #aed3d7;
         }
 
-        /* ─────────── 3 SMALL IMAGES UNDER HERO ─────────── */
+        /* ─────────── 3 SMALL PLACEHOLDERS UNDER HERO ─────────── */
         .mini-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -171,13 +171,7 @@
             justify-content: center;
             font-size: 0.8rem;
             color: #1e4548;
-            font-weight: 600;
-        }
-        .mini-placeholder .tag {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 0.2rem 0.8rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
+            font-weight: 500;
         }
 
         .mini-item h4 {
@@ -188,22 +182,6 @@
         .mini-item p {
             font-size: 0.8rem;
             color: #4d6f71;
-        }
-
-        /* ─────────── SECTION TITLE ─────────── */
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #FFD87B;
-            text-align: center;
-            margin: 3.5rem 0 1.8rem;
-            letter-spacing: -0.5px;
-        }
-        .section-title span {
-            background: #FEFAC2;
-            padding: 0.1rem 1.2rem;
-            border-radius: 60px;
-            display: inline-block;
         }
 
         /* ─────────── MENU / ABOUT / CONTACT SECTIONS ─────────── */
@@ -229,9 +207,6 @@
             color: #FFD87B;
             font-size: 1.6rem;
             margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .info-card ul {
@@ -243,6 +218,8 @@
             border-bottom: 1px solid rgba(191, 223, 226, 0.3);
             color: #1e2e2f;
             font-weight: 500;
+            display: flex;
+            justify-content: space-between;
         }
         .info-card ul li:last-child {
             border-bottom: none;
@@ -258,21 +235,21 @@
             margin-bottom: 0.5rem;
         }
 
-        .info-card .contact-detail {
+        .contact-detail {
             display: flex;
             align-items: center;
             gap: 0.8rem;
             padding: 0.6rem 0;
             border-bottom: 1px solid rgba(191, 223, 226, 0.2);
         }
-        .info-card .contact-detail:last-child {
+        .contact-detail:last-child {
             border-bottom: none;
         }
-        .info-card .contact-detail strong {
+        .contact-detail strong {
             color: #FFD87B;
             min-width: 70px;
         }
-        .info-card .contact-detail span {
+        .contact-detail span {
             color: #1e2e2f;
         }
 
@@ -288,11 +265,6 @@
         }
         .banner-placeholder:hover {
             background: #fef8d0;
-        }
-        .banner-placeholder .big-icon {
-            font-size: 3.6rem;
-            display: block;
-            margin-bottom: 0.2rem;
         }
         .banner-placeholder p {
             font-size: 1.4rem;
@@ -351,9 +323,6 @@
                 gap: 1.2rem;
                 font-size: 0.95rem;
             }
-            .section-title {
-                font-size: 1.7rem;
-            }
             .mini-grid {
                 grid-template-columns: 1fr;
                 max-width: 300px;
@@ -391,7 +360,7 @@
     <!-- ═══ NAVIGATION ═══ -->
     <nav>
         <div class="logo">
-            🍞 <span class="highlight">Winter</span><span class="muted">Hearth</span>
+            <span class="highlight">Winter</span><span class="muted">Hearth</span>
         </div>
         <div class="nav-links">
             <a href="#menu">Menu</a>
@@ -403,7 +372,7 @@
     <!-- ═══ HERO ═══ -->
     <section class="hero">
         <h1>
-            ☕ Warmth <br class="mobile-break" />
+            Warmth <br />
             <span class="cool">in every</span> bite
         </h1>
         <p>Fresh bread · slow coffee · winter comfort</p>
@@ -412,26 +381,20 @@
             <a href="#about" class="btn btn-secondary">Our Story</a>
         </div>
 
-        <!-- ─── 3 SMALL IMAGES UNDER HERO ─── -->
+        <!-- ─── 3 SMALL PLACEHOLDERS UNDER HERO ─── -->
         <div class="mini-grid">
             <div class="mini-item">
-                <div class="mini-placeholder">
-                    <span class="tag">📸 Image</span>
-                </div>
+                <div class="mini-placeholder">Image</div>
                 <h4>Fresh Baked Daily</h4>
                 <p>Warm from the oven</p>
             </div>
             <div class="mini-item">
-                <div class="mini-placeholder">
-                    <span class="tag">📸 Image</span>
-                </div>
+                <div class="mini-placeholder">Image</div>
                 <h4>Single Origin Coffee</h4>
                 <p>Ethically sourced</p>
             </div>
             <div class="mini-item">
-                <div class="mini-placeholder">
-                    <span class="tag">📸 Image</span>
-                </div>
+                <div class="mini-placeholder">Image</div>
                 <h4>Cozy Atmosphere</h4>
                 <p>Your winter hideaway</p>
             </div>
@@ -443,21 +406,21 @@
 
         <!-- MENU -->
         <div class="info-card">
-            <h3>📋 Menu</h3>
+            <h3>Menu</h3>
             <ul>
-                <li>🥐 Butter Croissant <span>$4.50</span></li>
-                <li>🍞 Sourdough Loaf <span>$6.00</span></li>
-                <li>🥖 Baguette <span>$5.00</span></li>
-                <li>☕ Hazelnut Latte <span>$5.50</span></li>
-                <li>🍫 Double Choc Cookie <span>$3.50</span></li>
-                <li>🧁 Cinnamon Roll <span>$4.75</span></li>
-                <li>🍵 Matcha Tea <span>$4.25</span></li>
+                <li>Butter Croissant <span>$4.50</span></li>
+                <li>Sourdough Loaf <span>$6.00</span></li>
+                <li>Baguette <span>$5.00</span></li>
+                <li>Hazelnut Latte <span>$5.50</span></li>
+                <li>Double Choc Cookie <span>$3.50</span></li>
+                <li>Cinnamon Roll <span>$4.75</span></li>
+                <li>Matcha Tea <span>$4.25</span></li>
             </ul>
         </div>
 
         <!-- ABOUT -->
         <div class="info-card" id="about">
-            <h3>🔥 About Us</h3>
+            <h3>About Us</h3>
             <p>
                 <strong>Winter Hearth Bakery</strong> was born in 2018 from a love of 
                 slow mornings and the smell of fresh bread. Nestled in the heart of 
@@ -465,27 +428,27 @@
                 ingredients — because good food starts with good people.
             </p>
             <p style="margin-top: 0.8rem; color: #4d6f71;">
-                ✦ Open since 6am · 7 days a week ✦
+                Open since 6am · 7 days a week
             </p>
         </div>
 
         <!-- CONTACT -->
         <div class="info-card" id="contact">
-            <h3>📬 Contact</h3>
+            <h3>Contact</h3>
             <div class="contact-detail">
-                <strong>📍 Address</strong>
+                <strong>Address</strong>
                 <span>42 Frost Lane, Old Town</span>
             </div>
             <div class="contact-detail">
-                <strong>📞 Phone</strong>
+                <strong>Phone</strong>
                 <span>+1 (555) 283-7941</span>
             </div>
             <div class="contact-detail">
-                <strong>✉️ Email</strong>
+                <strong>Email</strong>
                 <span>hello@winterhearth.com</span>
             </div>
             <div class="contact-detail">
-                <strong>🕐 Hours</strong>
+                <strong>Hours</strong>
                 <span>Mon–Sun · 6:00 AM – 8:00 PM</span>
             </div>
         </div>
@@ -494,17 +457,16 @@
 
     <!-- ═══ LARGE BANNER PLACEHOLDER ═══ -->
     <div class="banner-placeholder">
-        <span class="big-icon">🖼️</span>
-        <p>Your hero image placeholder here</p>
-        <small>1200 × 400 px · replace with your bakery shot</small>
+        <p>Hero Image Placeholder</p>
+        <small>1200 × 400 px</small>
     </div>
 
     <!-- ═══ FOOTER ═══ -->
     <footer>
         <div>© 2026 Winter Hearth Bakery · Est. 2018</div>
         <div class="socials">
-            <a href="#">IG</a>
-            <a href="#">FB</a>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
             <a href="#">TikTok</a>
         </div>
     </footer>
