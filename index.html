@@ -176,7 +176,79 @@
             }
         }
 
-        /* ─────────── SLIDING GALLERY (Instagram/TikTok style) ─────────── */
+        /* ─────────── MENU SECTION (categorized) ─────────── */
+        .menu-section {
+            margin: 2rem 0 1.5rem;
+        }
+
+        .menu-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #E6B84C;
+            margin-bottom: 2rem;
+        }
+
+        .menu-category {
+            margin-bottom: 2.5rem;
+        }
+
+        .menu-category h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a2222;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #E6B84C;
+            display: inline-block;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .menu-item {
+            padding: 1.2rem 1.5rem;
+            border-radius: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: default;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .menu-item .name {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #1a2222;
+        }
+
+        .menu-item .price {
+            font-weight: 700;
+            color: #1a2222;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+        }
+
+        /* Color alternation */
+        .menu-item.creamy-blue {
+            background: #B0CDD0;
+        }
+
+        .menu-item.creamy-yellow {
+            background: #E6B84C;
+        }
+
+        /* ─────────── SLIDING GALLERY ─────────── */
         .gallery-section {
             margin: 2.5rem 0 1.5rem;
         }
@@ -215,7 +287,7 @@
             background: #B0CDD0;
             border: 3px dashed #6e9599;
             border-radius: 1.5rem;
-            height: 300px;
+            height: 280px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -243,7 +315,6 @@
             font-size: 1rem;
         }
 
-        /* Gallery dots */
         .gallery-dots {
             display: flex;
             justify-content: center;
@@ -274,7 +345,6 @@
             opacity: 0.7;
         }
 
-        /* Gallery arrows */
         .gallery-arrows {
             display: flex;
             justify-content: center;
@@ -308,7 +378,7 @@
             transform: scale(0.95);
         }
 
-        /* ─────────── MENU / ABOUT / CONTACT SECTIONS ─────────── */
+        /* ─────────── ABOUT & CONTACT ─────────── */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -331,26 +401,6 @@
             color: #E6B84C;
             font-size: 1.6rem;
             margin-bottom: 1rem;
-        }
-
-        .info-card ul {
-            list-style: none;
-            padding: 0;
-        }
-        .info-card ul li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(172, 205, 208, 0.3);
-            color: #1a2222;
-            font-weight: 500;
-            display: flex;
-            justify-content: space-between;
-        }
-        .info-card ul li:last-child {
-            border-bottom: none;
-        }
-        .info-card ul li span {
-            color: #4d6f71;
-            font-weight: 400;
         }
 
         .info-card p {
@@ -447,6 +497,9 @@
                 gap: 1.2rem;
                 font-size: 0.95rem;
             }
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
             .info-grid {
                 grid-template-columns: 1fr;
             }
@@ -514,18 +567,99 @@
             </h1>
             <p>Fresh bread · slow coffee · winter comfort</p>
             <div class="btn-group">
-                <button class="btn btn-primary" id="orderBtn">Order Now</button>
+                <button class="btn btn-primary" id="viewMenuBtn">View Menu</button>
                 <a href="#about" class="btn btn-secondary">Our Story</a>
             </div>
         </section>
 
-        <!-- ═══ SLIDING GALLERY (replaces image placeholders) ═══ -->
+        <!-- ═══ MENU SECTION (categorized, moved up) ═══ -->
+        <section class="menu-section" id="menu">
+            <h2>✦ Our Menu</h2>
+
+            <!-- Drinks -->
+            <div class="menu-category">
+                <h3>☕ Drinks</h3>
+                <div class="menu-items">
+                    <div class="menu-item creamy-blue">
+                        <span class="name">Hazelnut Latte</span>
+                        <span class="price">$5.50</span>
+                    </div>
+                    <div class="menu-item creamy-yellow">
+                        <span class="name">Matcha Tea</span>
+                        <span class="price">$4.25</span>
+                    </div>
+                    <div class="menu-item creamy-blue">
+                        <span class="name">Cappuccino</span>
+                        <span class="price">$4.75</span>
+                    </div>
+                    <div class="menu-item creamy-yellow">
+                        <span class="name">Hot Chocolate</span>
+                        <span class="price">$5.00</span>
+                    </div>
+                    <div class="menu-item creamy-blue">
+                        <span class="name">Iced Americano</span>
+                        <span class="price">$4.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Food / Bakery -->
+            <div class="menu-category">
+                <h3>🥐 Bakery</h3>
+                <div class="menu-items">
+                    <div class="menu-item creamy-yellow">
+                        <span class="name">Butter Croissant</span>
+                        <span class="price">$4.50</span>
+                    </div>
+                    <div class="menu-item creamy-blue">
+                        <span class="name">Sourdough Loaf</span>
+                        <span class="price">$6.00</span>
+                    </div>
+                    <div class="menu-item creamy-yellow">
+                        <span class="name">Baguette</span>
+                        <span class="price">$5.00</span>
+                    </div>
+                    <div class="menu-item creamy-blue">
+                        <span class="name">Cinnamon Roll</span>
+                        <span class="price">$4.75</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pastry / Sweets -->
+            <div class="menu-category">
+                <h3>🍰 Pastry &amp; Sweets</h3>
+                <div class="menu-items">
+                    <div class="menu-item creamy-blue">
+                        <span class="name">Double Choc Cookie</span>
+                        <span class="price">$3.50</span>
+                    </div>
+                    <div class="menu-item creamy-yellow">
+                        <span class="name">Almond Danish</span>
+                        <span class="price">$4.25</span>
+                    </div>
+                    <div class="menu-item creamy-blue">
+                        <span class="name">Pecan Tart</span>
+                        <span class="price">$5.25</span>
+                    </div>
+                    <div class="menu-item creamy-yellow">
+                        <span class="name">Vanilla Muffin</span>
+                        <span class="price">$3.75</span>
+                    </div>
+                    <div class="menu-item creamy-blue">
+                        <span class="name">Brownie</span>
+                        <span class="price">$4.00</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SLIDING GALLERY (below menu) ═══ -->
         <section class="gallery-section" id="gallery">
             <h2>✦ Gallery</h2>
             <div class="gallery-wrapper">
                 <div class="gallery-track" id="galleryTrack">
 
-                    <!-- Slide 1 -->
                     <div class="gallery-slide">
                         <div class="slide-placeholder">
                             <span class="big">📸</span>
@@ -535,7 +669,6 @@
                         <p>Baked fresh every morning</p>
                     </div>
 
-                    <!-- Slide 2 -->
                     <div class="gallery-slide">
                         <div class="slide-placeholder">
                             <span class="big">📸</span>
@@ -545,7 +678,6 @@
                         <p>Single origin espresso + buttery croissant</p>
                     </div>
 
-                    <!-- Slide 3 -->
                     <div class="gallery-slide">
                         <div class="slide-placeholder">
                             <span class="big">📸</span>
@@ -555,7 +687,6 @@
                         <p>Warm lighting, good books, better coffee</p>
                     </div>
 
-                    <!-- Slide 4 -->
                     <div class="gallery-slide">
                         <div class="slide-placeholder">
                             <span class="big">📸</span>
@@ -568,7 +699,6 @@
                 </div>
             </div>
 
-            <!-- Dots -->
             <div class="gallery-dots" id="galleryDots">
                 <button class="gallery-dot active" data-index="0"></button>
                 <button class="gallery-dot" data-index="1"></button>
@@ -576,31 +706,15 @@
                 <button class="gallery-dot" data-index="3"></button>
             </div>
 
-            <!-- Arrows -->
             <div class="gallery-arrows">
                 <button class="gallery-arrow" id="prevArrow">‹</button>
                 <button class="gallery-arrow" id="nextArrow">›</button>
             </div>
         </section>
 
-        <!-- ═══ MENU / ABOUT / CONTACT GRID ═══ -->
-        <div class="info-grid" id="menu">
+        <!-- ═══ ABOUT & CONTACT ═══ -->
+        <div class="info-grid">
 
-            <!-- MENU -->
-            <div class="info-card">
-                <h3>Menu</h3>
-                <ul>
-                    <li>Butter Croissant <span>$4.50</span></li>
-                    <li>Sourdough Loaf <span>$6.00</span></li>
-                    <li>Baguette <span>$5.00</span></li>
-                    <li>Hazelnut Latte <span>$5.50</span></li>
-                    <li>Double Choc Cookie <span>$3.50</span></li>
-                    <li>Cinnamon Roll <span>$4.75</span></li>
-                    <li>Matcha Tea <span>$4.25</span></li>
-                </ul>
-            </div>
-
-            <!-- ABOUT -->
             <div class="info-card" id="about">
                 <h3>About Us</h3>
                 <p>
@@ -614,7 +728,6 @@
                 </p>
             </div>
 
-            <!-- CONTACT -->
             <div class="info-card" id="contact">
                 <h3>Contact</h3>
                 <div class="contact-detail">
@@ -637,7 +750,7 @@
 
         </div>
 
-        <!-- ═══ LARGE BANNER PLACEHOLDER ═══ -->
+        <!-- ═══ BANNER PLACEHOLDER ═══ -->
         <div class="banner-placeholder">
             <p>Hero Image Placeholder</p>
             <small>1200 × 400 px</small>
@@ -656,8 +769,8 @@
     </div>
 
     <script>
-        // ─── BURST STICKERS ON CLICK (slower) ───
-        document.getElementById('orderBtn').addEventListener('click', function(e) {
+        // ─── BURST STICKERS ON CLICK ───
+        document.getElementById('viewMenuBtn').addEventListener('click', function(e) {
             const rect = this.getBoundingClientRect();
             const cx = rect.left + rect.width / 2;
             const cy = rect.top + rect.height / 2;
@@ -718,13 +831,11 @@
         prevBtn.addEventListener('click', () => updateGallery(currentIndex - 1));
         nextBtn.addEventListener('click', () => updateGallery(currentIndex + 1));
 
-        // Keyboard support
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') updateGallery(currentIndex - 1);
             if (e.key === 'ArrowRight') updateGallery(currentIndex + 1);
         });
 
-        // Touch support
         let touchStartX = 0;
         let touchEndX = 0;
         const wrapper = document.querySelector('.gallery-wrapper');
