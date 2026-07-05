@@ -18,13 +18,15 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #D7EDEF;
+            background: #C5DDE0; /* 10% darker than #D7EDEF */
             color: #1e2e2f;
             padding: 1.5rem;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow-x: hidden;
         }
 
         .container {
@@ -36,7 +38,40 @@
             border-radius: 3rem;
             padding: 2.5rem;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.07);
-            border: 1px solid rgba(191, 223, 226, 0.3);
+            border: 1px solid rgba(172, 205, 208, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ─────────── FALLING COFFEE CUPS ─────────── */
+        .falling-cups {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .coffee-cup {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: fall linear infinite;
+            opacity: 0.7;
+            user-select: none;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0.1;
+            }
         }
 
         /* ─────────── NAVIGATION ─────────── */
@@ -47,7 +82,7 @@
             flex-wrap: wrap;
             gap: 1rem;
             padding-bottom: 1.8rem;
-            border-bottom: 2px solid #BFDFE2;
+            border-bottom: 2px solid #B0CDD0; /* 10% darker than #BFDFE2 */
         }
 
         .logo {
@@ -59,7 +94,7 @@
             color: #FFD87B;
         }
         .logo .muted {
-            color: #BFDFE2;
+            color: #B0CDD0;
             font-weight: 300;
         }
 
@@ -95,7 +130,7 @@
             line-height: 1.1;
         }
         .hero h1 .cool {
-            color: #BFDFE2;
+            color: #B0CDD0;
             font-weight: 300;
         }
         .hero p {
@@ -132,12 +167,12 @@
             box-shadow: 0 16px 40px rgba(255, 216, 123, 0.55);
         }
         .btn-secondary {
-            background: #BFDFE2;
+            background: #B0CDD0;
             color: #1a2728;
         }
         .btn-secondary:hover {
             transform: translateY(-3px) scale(1.02);
-            background: #aed3d7;
+            background: #9dbec2;
         }
 
         /* ─────────── 3 SMALL PLACEHOLDERS UNDER HERO ─────────── */
@@ -162,8 +197,8 @@
         }
 
         .mini-placeholder {
-            background: #BFDFE2;
-            border: 2px dashed #7ba6aa;
+            background: #B0CDD0;
+            border: 2px dashed #6e9599;
             border-radius: 1rem;
             height: 90px;
             display: flex;
@@ -196,7 +231,7 @@
             background: #FEFAC2;
             border-radius: 2rem;
             padding: 2rem 1.5rem;
-            border: 1px solid rgba(191, 223, 226, 0.3);
+            border: 1px solid rgba(172, 205, 208, 0.3);
             transition: transform 0.2s;
         }
         .info-card:hover {
@@ -215,7 +250,7 @@
         }
         .info-card ul li {
             padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(191, 223, 226, 0.3);
+            border-bottom: 1px solid rgba(172, 205, 208, 0.3);
             color: #1e2e2f;
             font-weight: 500;
             display: flex;
@@ -240,7 +275,7 @@
             align-items: center;
             gap: 0.8rem;
             padding: 0.6rem 0;
-            border-bottom: 1px solid rgba(191, 223, 226, 0.2);
+            border-bottom: 1px solid rgba(172, 205, 208, 0.2);
         }
         .contact-detail:last-child {
             border-bottom: none;
@@ -272,7 +307,7 @@
             color: #1e4548;
         }
         .banner-placeholder small {
-            color: #7ba6aa;
+            color: #6e9599;
             font-weight: 500;
             display: block;
             margin-top: 0.2rem;
@@ -283,7 +318,7 @@
         footer {
             margin-top: 2.5rem;
             padding-top: 2rem;
-            border-top: 2px solid #BFDFE2;
+            border-top: 2px solid #B0CDD0;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -336,6 +371,9 @@
             .banner-placeholder p {
                 font-size: 1.1rem;
             }
+            .coffee-cup {
+                font-size: 1.8rem !important;
+            }
         }
 
         @media (max-width: 450px) {
@@ -350,128 +388,165 @@
                 padding: 0.7rem 2rem;
                 font-size: 0.9rem;
             }
+            .coffee-cup {
+                font-size: 1.4rem !important;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+    <!-- ═══ FALLING COFFEE CUPS ═══ -->
+    <div class="falling-cups" id="fallingCups"></div>
 
-    <!-- ═══ NAVIGATION ═══ -->
-    <nav>
-        <div class="logo">
-            <span class="highlight">Winter</span><span class="muted">Hearth</span>
-        </div>
-        <div class="nav-links">
-            <a href="#menu">Menu</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
+    <div class="container">
 
-    <!-- ═══ HERO ═══ -->
-    <section class="hero">
-        <h1>
-            Warmth <br />
-            <span class="cool">in every</span> bite
-        </h1>
-        <p>Fresh bread · slow coffee · winter comfort</p>
-        <div class="btn-group">
-            <a href="#menu" class="btn btn-primary">Order Now</a>
-            <a href="#about" class="btn btn-secondary">Our Story</a>
+        <!-- ═══ NAVIGATION ═══ -->
+        <nav>
+            <div class="logo">
+                <span class="highlight">Winter</span><span class="muted">Hearth</span>
+            </div>
+            <div class="nav-links">
+                <a href="#menu">Menu</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <!-- ═══ HERO ═══ -->
+        <section class="hero">
+            <h1>
+                Warmth <br />
+                <span class="cool">in every</span> bite
+            </h1>
+            <p>Fresh bread · slow coffee · winter comfort</p>
+            <div class="btn-group">
+                <a href="#menu" class="btn btn-primary">Order Now</a>
+                <a href="#about" class="btn btn-secondary">Our Story</a>
+            </div>
+
+            <!-- ─── 3 SMALL PLACEHOLDERS UNDER HERO ─── -->
+            <div class="mini-grid">
+                <div class="mini-item">
+                    <div class="mini-placeholder">Image</div>
+                    <h4>Fresh Baked Daily</h4>
+                    <p>Warm from the oven</p>
+                </div>
+                <div class="mini-item">
+                    <div class="mini-placeholder">Image</div>
+                    <h4>Single Origin Coffee</h4>
+                    <p>Ethically sourced</p>
+                </div>
+                <div class="mini-item">
+                    <div class="mini-placeholder">Image</div>
+                    <h4>Cozy Atmosphere</h4>
+                    <p>Your winter hideaway</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ MENU / ABOUT / CONTACT GRID ═══ -->
+        <div class="info-grid" id="menu">
+
+            <!-- MENU -->
+            <div class="info-card">
+                <h3>Menu</h3>
+                <ul>
+                    <li>Butter Croissant <span>$4.50</span></li>
+                    <li>Sourdough Loaf <span>$6.00</span></li>
+                    <li>Baguette <span>$5.00</span></li>
+                    <li>Hazelnut Latte <span>$5.50</span></li>
+                    <li>Double Choc Cookie <span>$3.50</span></li>
+                    <li>Cinnamon Roll <span>$4.75</span></li>
+                    <li>Matcha Tea <span>$4.25</span></li>
+                </ul>
+            </div>
+
+            <!-- ABOUT -->
+            <div class="info-card" id="about">
+                <h3>About Us</h3>
+                <p>
+                    <strong>Winter Hearth Bakery</strong> was born in 2018 from a love of 
+                    slow mornings and the smell of fresh bread. Nestled in the heart of 
+                    the old town, we bake everything from scratch using locally sourced 
+                    ingredients — because good food starts with good people.
+                </p>
+                <p style="margin-top: 0.8rem; color: #4d6f71;">
+                    Open since 6am · 7 days a week
+                </p>
+            </div>
+
+            <!-- CONTACT -->
+            <div class="info-card" id="contact">
+                <h3>Contact</h3>
+                <div class="contact-detail">
+                    <strong>Address</strong>
+                    <span>42 Frost Lane, Old Town</span>
+                </div>
+                <div class="contact-detail">
+                    <strong>Phone</strong>
+                    <span>+1 (555) 283-7941</span>
+                </div>
+                <div class="contact-detail">
+                    <strong>Email</strong>
+                    <span>hello@winterhearth.com</span>
+                </div>
+                <div class="contact-detail">
+                    <strong>Hours</strong>
+                    <span>Mon–Sun · 6:00 AM – 8:00 PM</span>
+                </div>
+            </div>
+
         </div>
 
-        <!-- ─── 3 SMALL PLACEHOLDERS UNDER HERO ─── -->
-        <div class="mini-grid">
-            <div class="mini-item">
-                <div class="mini-placeholder">Image</div>
-                <h4>Fresh Baked Daily</h4>
-                <p>Warm from the oven</p>
-            </div>
-            <div class="mini-item">
-                <div class="mini-placeholder">Image</div>
-                <h4>Single Origin Coffee</h4>
-                <p>Ethically sourced</p>
-            </div>
-            <div class="mini-item">
-                <div class="mini-placeholder">Image</div>
-                <h4>Cozy Atmosphere</h4>
-                <p>Your winter hideaway</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══ MENU / ABOUT / CONTACT GRID ═══ -->
-    <div class="info-grid" id="menu">
-
-        <!-- MENU -->
-        <div class="info-card">
-            <h3>Menu</h3>
-            <ul>
-                <li>Butter Croissant <span>$4.50</span></li>
-                <li>Sourdough Loaf <span>$6.00</span></li>
-                <li>Baguette <span>$5.00</span></li>
-                <li>Hazelnut Latte <span>$5.50</span></li>
-                <li>Double Choc Cookie <span>$3.50</span></li>
-                <li>Cinnamon Roll <span>$4.75</span></li>
-                <li>Matcha Tea <span>$4.25</span></li>
-            </ul>
+        <!-- ═══ LARGE BANNER PLACEHOLDER ═══ -->
+        <div class="banner-placeholder">
+            <p>Hero Image Placeholder</p>
+            <small>1200 × 400 px</small>
         </div>
 
-        <!-- ABOUT -->
-        <div class="info-card" id="about">
-            <h3>About Us</h3>
-            <p>
-                <strong>Winter Hearth Bakery</strong> was born in 2018 from a love of 
-                slow mornings and the smell of fresh bread. Nestled in the heart of 
-                the old town, we bake everything from scratch using locally sourced 
-                ingredients — because good food starts with good people.
-            </p>
-            <p style="margin-top: 0.8rem; color: #4d6f71;">
-                Open since 6am · 7 days a week
-            </p>
-        </div>
-
-        <!-- CONTACT -->
-        <div class="info-card" id="contact">
-            <h3>Contact</h3>
-            <div class="contact-detail">
-                <strong>Address</strong>
-                <span>42 Frost Lane, Old Town</span>
+        <!-- ═══ FOOTER ═══ -->
+        <footer>
+            <div>© 2026 Winter Hearth Bakery · Est. 2018</div>
+            <div class="socials">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">TikTok</a>
             </div>
-            <div class="contact-detail">
-                <strong>Phone</strong>
-                <span>+1 (555) 283-7941</span>
-            </div>
-            <div class="contact-detail">
-                <strong>Email</strong>
-                <span>hello@winterhearth.com</span>
-            </div>
-            <div class="contact-detail">
-                <strong>Hours</strong>
-                <span>Mon–Sun · 6:00 AM – 8:00 PM</span>
-            </div>
-        </div>
+        </footer>
 
     </div>
 
-    <!-- ═══ LARGE BANNER PLACEHOLDER ═══ -->
-    <div class="banner-placeholder">
-        <p>Hero Image Placeholder</p>
-        <small>1200 × 400 px</small>
-    </div>
+    <script>
+        // ─── CREATE FALLING COFFEE CUPS ───
+        function createFallingCups() {
+            const container = document.getElementById('fallingCups');
+            const cupCount = 25;
 
-    <!-- ═══ FOOTER ═══ -->
-    <footer>
-        <div>© 2026 Winter Hearth Bakery · Est. 2018</div>
-        <div class="socials">
-            <a href="#">Instagram</a>
-            <a href="#">Facebook</a>
-            <a href="#">TikTok</a>
-        </div>
-    </footer>
+            for (let i = 0; i < cupCount; i++) {
+                const cup = document.createElement('div');
+                cup.className = 'coffee-cup';
+                cup.textContent = '☕';
 
-</div>
+                // Random position, size, speed, delay
+                const size = 1.5 + Math.random() * 2;
+                const left = Math.random() * 100;
+                const duration = 8 + Math.random() * 12;
+                const delay = Math.random() * 15;
+
+                cup.style.left = left + '%';
+                cup.style.fontSize = size + 'rem';
+                cup.style.animationDuration = duration + 's';
+                cup.style.animationDelay = delay + 's';
+                cup.style.opacity = 0.3 + Math.random() * 0.5;
+
+                container.appendChild(cup);
+            }
+        }
+
+        // ─── RUN ───
+        createFallingCups();
+    </script>
 
 </body>
 </html>
